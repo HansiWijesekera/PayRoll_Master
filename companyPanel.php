@@ -1,0 +1,1 @@
+<button onclick="location.href='Company/employeeSalaries.php'" type="button">Add Salaries</button>
