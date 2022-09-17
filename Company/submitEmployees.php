@@ -17,8 +17,8 @@ $companyID = $_SESSION['companyId'];
 
 
 if (isset($_POST['submit'])) {
-    $updateQuery = "UPDATE employee,bankinfo,employee_vise_categories set employee.status = 'A' , bankinfo.status = 'A' , employee_vise_categories.status = 'A' 
-    WHERE employee.employeeId = bankinfo.employeeId  and employee_vise_categories.employeeId = employee.employeeId and employee.status = 'I' and bankinfo.status = 'I' and employee.companyId = $companyID";
+    $updateQuery = "UPDATE employee,bankinfo set employee.status = 'A' , bankinfo.status = 'A' 
+    WHERE employee.employeeId = bankinfo.employeeId  and employee.status = 'I' and bankinfo.status = 'I' and employee.companyId = $companyID";
     if (mysqli_query($con, $updateQuery)) {
         echo " <script type='text/javascript'>alert('Employee Details Submitted Sucessfully');location.href='submitEmployees.php'</script>";
     } else {
@@ -28,8 +28,8 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['reject'])) {
-    $updateQuery = "UPDATE employee,bankinfo set employee.status = 'R' , bankinfo.status = 'R' , employee_vise_categories.status = 'R' 
-    WHERE employee.employeeId = bankinfo.employeeId and employee_vise_categories.employeeId = employee.employeeId and employee.status = 'I' and bankinfo.status = 'I' and employee.companyId = $companyID";
+    $updateQuery = "UPDATE employee,bankinfo set employee.status = 'R' , bankinfo.status = 'R' 
+    WHERE employee.employeeId = bankinfo.employeeId  and employee.status = 'I' and bankinfo.status = 'I' and employee.companyId = $companyID";
     if (mysqli_query($con, $updateQuery)) {
         echo " <script type='text/javascript'>alert('Employee Details Rejected Sucessfully');location.href='submitEmployees.php'</script>";
     } else {

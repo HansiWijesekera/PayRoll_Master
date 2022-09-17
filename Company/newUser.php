@@ -31,7 +31,7 @@ if (isset($_POST['employeeName'])) {
     $password = MD5($_POST['password']);
     $userName = $_POST['userName'];
     $userType = "3";
-    $companyId = '$companyID';
+    
 
     $sql = "SELECT * FROM employee WHERE email='$email'";
     $res = mysqli_query($con, $sql);
@@ -54,7 +54,7 @@ if (isset($_POST['employeeName'])) {
             $userId = mysqli_insert_id($con);
             if ($employeeName <> "") {
                 $query1 = "INSERT INTO employee (employeeName,joinDate,address,nic,dob,cantactNo,jobTitle,userId,email,companyId,status)
-        	           VALUES('$employeeName','$joinDate','$address','$nic','$dob','$cantactNo','$jobTitle','$userId','$email','$companyId','$status')";
+        	           VALUES('$employeeName','$joinDate','$address','$nic','$dob','$cantactNo','$jobTitle','$userId','$email','$companyID','$status')";
 
                 if (mysqli_query($con, $query1)) {
                     $employeeId = mysqli_insert_id($con);
