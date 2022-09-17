@@ -104,13 +104,13 @@ $employeeID = $_SESSION['employeeId'];
                             <label class="form-control-label">Enter Email</label>
                             <input type="email" name="email" class="form-control" required value="<?php echo $result['email']; ?>" />
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="form-control-label">Select Status</label>
                             <select id="status" name="status" class="form-control" value="<?php echo $result['status']; ?>">
                                 <option value="Active">Active</option>
                                 <option value="Non-Active">Non-Active</option>
                             </select>
-                        </div>
+                        </div> -->
                     <?php
                     }
 
@@ -157,17 +157,17 @@ $employeeID = $_SESSION['employeeId'];
                             <label class="form-control-label">Enter Account Holder</label>
                             <input type="text" name="accoundHolder" class="form-control" value="<?php echo $resultx['accoundHolder']; ?>" required />
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="form-control-label">Select Status</label>
                             <select id="status1" name="status1" class="form-control" value="<?php echo $resultx['status']; ?>">
                                 <option value="Active">Active</option>
                                 <option value="Closed">Colosed</option>
                             </select>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label class="form-control-label">Enter initiated Date</label>
                             <input type="date" name="initiatedDate" class="form-control" required value="<?php echo $resultx['initiatedDate']; ?>" />
-                        </div>
+                        </div> -->
                     <?php
                     }
                     ?>
