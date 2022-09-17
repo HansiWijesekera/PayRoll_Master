@@ -3,6 +3,7 @@ include '../dbconn.php';
 include '../Headers/adminHeader.php';
 
 session_start();
+error_reporting(0);
 
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
     header("location: ../index.php");

@@ -20,8 +20,9 @@ if (isset($_POST['userName'])) {
         $_SESSION['userType'] = $row[3];
 
         header('location:role.php');
-    } else
+    } else{
         echo "<script type='text/javascript'>alert('Account Invalid Please Contact Admin');</script>";
+    }
 }
 ?>
 <html lang="en">

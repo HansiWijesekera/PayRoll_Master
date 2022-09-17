@@ -1,6 +1,8 @@
 <?php include '../dbconn.php';
 include '../Headers/companyHeader.php';
 session_start();
+error_reporting(0);
+
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 2) {
     header("location: ../index.php");
     exit();
