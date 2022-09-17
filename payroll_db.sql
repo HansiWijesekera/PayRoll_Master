@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `bankinfo` (
   `branchCode` varchar(50) DEFAULT NULL,
   `accoundHolder` varchar(50) DEFAULT NULL,
   `employeeId` int(11) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('I','A','R','E') DEFAULT NULL,
   `initiatedDate` date DEFAULT NULL,
   PRIMARY KEY (`bankInfoId`),
   KEY `employeeid` (`employeeId`)
@@ -51,18 +51,19 @@ CREATE TABLE IF NOT EXISTS `company` (
   `lastUpdateDate` date DEFAULT NULL,
   `userId` int(11) DEFAULT NULL,
   `BRI` varchar(50) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('I','A','R','E') DEFAULT NULL,
   PRIMARY KEY (`companyId`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table payroll.company: 5 rows
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
 INSERT INTO `company` (`companyId`, `companyName`, `salaryDate`, `lastUpdateDate`, `userId`, `BRI`, `status`) VALUES
-	(1, 'abc', '2022-08-09', '2022-07-10', 10, '123', 'a'),
+	(1, 'abc', '2022-08-09', '2022-07-10', 10, '123', 'A'),
 	(4, 'Company1236', '2022-05-05', '2022-07-10', 13, '1235', 'A'),
-	(5, 'COMPANY01', '2022-02-02', NULL, 62, '1234', 'Active'),
-	(6, 'Abcd', '2022-09-08', NULL, 276, '123', 'Active'),
-	(8, 'XYZ company', '2022-09-07', NULL, 279, '1234567', 'Active');
+	(5, 'COMPANY01', '2022-02-02', NULL, 62, '1234', ''),
+	(6, 'Abcd', '2022-09-08', NULL, 276, '123', ''),
+	(8, 'XYZ company', '2022-09-07', NULL, 279, '1234567', ''),
+	(9, 'sqwe', '2022-09-22', NULL, 12001, '12356', '');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 
 -- Dumping structure for table payroll.company_wise_categories
@@ -70,19 +71,21 @@ CREATE TABLE IF NOT EXISTS `company_wise_categories` (
   `companyWiseCategoriesId` int(11) NOT NULL AUTO_INCREMENT,
   `salaryCategoryCode` varchar(50) DEFAULT NULL,
   `companyId` int(11) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('E','A') DEFAULT NULL,
   PRIMARY KEY (`companyWiseCategoriesId`),
   KEY `company_id` (`companyId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table payroll.company_wise_categories: 5 rows
 /*!40000 ALTER TABLE `company_wise_categories` DISABLE KEYS */;
 INSERT INTO `company_wise_categories` (`companyWiseCategoriesId`, `salaryCategoryCode`, `companyId`, `status`) VALUES
-	(1, 'epf', 8, 'null'),
-	(2, 'etf', 8, 'null'),
+	(1, 'epf', 8, ''),
+	(2, 'etf', 8, ''),
 	(3, 'FA', 8, 'E'),
 	(4, 'OA', 8, NULL),
-	(5, 'BS', 8, 'E');
+	(5, 'BS', 8, 'E'),
+	(6, 'etf', 1, 'A'),
+	(7, 'etf', 1, 'A');
 /*!40000 ALTER TABLE `company_wise_categories` ENABLE KEYS */;
 
 -- Dumping structure for table payroll.employee
@@ -98,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `userId` int(11) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `companyId` int(11) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('I','A','R','E') DEFAULT NULL,
   PRIMARY KEY (`employeeId`),
   KEY `company_id` (`companyId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=258 DEFAULT CHARSET=latin1;
@@ -106,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 -- Dumping data for table payroll.employee: 11 rows
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
 INSERT INTO `employee` (`employeeId`, `employeeName`, `joinDate`, `address`, `nic`, `dob`, `cantactNo`, `jobTitle`, `userId`, `email`, `companyId`, `status`) VALUES
-	(1, 'a', '2022-08-08', 'q', 's', '2022-08-08', 'd', 'd', 10, 'd', 1, 'd'),
+	(1, 'a', '2022-08-08', 'q', 's', '2022-08-08', 'd', 'd', 10, 'd', 1, ''),
 	(2, 'hansi', '2021-03-03', 'ss', '995671425V', '2222-03-03', '011-012365', 'mr', 10, 'wijesekera@gmail.com', 1, 'I'),
 	(5, 'Dilki', '2022-01-01', 'horana', '998954623V', '2022-03-03', '0112056985', 'Teacher', 10, 'hansi.kingdom360@gmail.com', 1, 'A'),
 	(10, 'kalpa', '2022-02-02', 'nugegoda', '669568754V', '2000-08-09', '2233333333', 'ss', 10, 'hansi.kingdom360@gmail.com', 1, 'A'),
@@ -127,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `employee_vise_categories` (
   `InitiatedDate` date DEFAULT NULL,
   `updateDate` date DEFAULT NULL,
   `expireDate` date DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL
+  `status` enum('I','A','E') DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Dumping data for table payroll.employee_vise_categories: 6 rows
@@ -173,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `salary` (
   `dueDate` date DEFAULT NULL,
   `settledAmount` decimal(10,0) DEFAULT NULL,
   `paidDate` date DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('I','A','P') DEFAULT NULL,
   PRIMARY KEY (`salaryID`),
   KEY `employeeid` (`employeeId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
@@ -199,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `salary_advance` (
   `amount` decimal(10,0) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `approvedDate` date DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('I','A','P','R') DEFAULT NULL,
   PRIMARY KEY (`advanceId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -220,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `salary_brakedown` (
   `salaryId` int(11) DEFAULT NULL,
   `companyWiseCategoriesID` int(11) DEFAULT NULL,
   `amount` decimal(10,0) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('I','A') DEFAULT NULL,
   PRIMARY KEY (`brakedownId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -238,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `salary_category` (
   `type` varchar(50) DEFAULT NULL,
   `common` varchar(50) DEFAULT NULL,
   `commonValue` decimal(10,0) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `status` enum('G','E','C') DEFAULT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
@@ -247,8 +250,8 @@ CREATE TABLE IF NOT EXISTS `salary_category` (
 INSERT INTO `salary_category` (`code`, `description`, `type`, `common`, `commonValue`, `status`) VALUES
 	('etf', 'EFT SALARY', 'Company', 'Rate', 8, 'G'),
 	('epf', 'EPF SALARY', 'Deduction', 'Rate', 10, 'G'),
-	('FA', 'FIX ALLOWANCE', 'Addition', 'amount', NULL, 'A'),
-	('BS', 'BASIC SALARY', 'Addition', 'amout', NULL, 'A');
+	('FA', 'FIX ALLOWANCE', 'Addition', 'amount', NULL, ''),
+	('BS', 'BASIC SALARY', 'Addition', 'amout', NULL, '');
 /*!40000 ALTER TABLE `salary_category` ENABLE KEYS */;
 
 -- Dumping structure for table payroll.salary_settlement
@@ -262,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `salary_settlement` (
   KEY `salarysettlement` (`salaryId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table payroll.salary_settlement: 1 rows
+-- Dumping data for table payroll.salary_settlement: 0 rows
 /*!40000 ALTER TABLE `salary_settlement` DISABLE KEYS */;
 INSERT INTO `salary_settlement` (`settlementId`, `salaryId`, `amount`, `paidDate`, `paymentType`) VALUES
 	(0, 79, 23000, '2022-09-17', 'System Payment');
@@ -289,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) DEFAULT NULL,
   `userType` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=MyISAM AUTO_INCREMENT=12001 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12002 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table payroll.user: 20 rows
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
@@ -313,7 +316,8 @@ INSERT INTO `user` (`userID`, `userName`, `password`, `userType`) VALUES
 	(20, 'Admin', '900150983cd24fb0d6963f7d28e17f72', '1'),
 	(277, 'xyz', 'e86ccb972fb44b55ed2b4d9b4f9bce7a', '2'),
 	(279, 'yawfreitas1234', '900150983cd24fb0d6963f7d28e17f72', '2'),
-	(280, 'Asho', '421ddf95509c8844dfd0c2a0f3afa6ce', '3');
+	(280, 'Asho', '421ddf95509c8844dfd0c2a0f3afa6ce', '3'),
+	(12001, 'Admin12345', '900150983cd24fb0d6963f7d28e17f72', '2');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
