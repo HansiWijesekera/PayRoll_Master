@@ -41,11 +41,11 @@ $userID = $_SESSION['userID'];
                             $companyName = $_POST['companyName'];
                             $salaryDate = $_POST['salaryDate'];
                             $BRI = $_POST['BRI'];
-                            $status = $_POST['status'];
+                           
 
                             $query =
                                 "UPDATE company set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
-                               BRI='" . $BRI . "', status='" . $status . "' WHERE userId = $userID ";
+                               BRI='" . $BRI . "' WHERE userId = $userID ";
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
@@ -73,15 +73,6 @@ $userID = $_SESSION['userID'];
                         <div class="form-group">
                             <label class="form-control-label">Enter BRI</label>
                             <input type="number" name="BRI" class="form-control" value="<?php echo $result['BRI']; ?>" required />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Select Status</label>
-                            <select id="status" name="status" class="form-control" value="<?php echo $result['status']; ?>">
-                                <option value="A">Active</option>
-                                <option value="E">Expired</option>
-                                <option value="I">Initiated</option>
-                                <option value="R">Rejected</option>
-                            </select>
                         </div>
 
                     <?php

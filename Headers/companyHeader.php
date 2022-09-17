@@ -87,7 +87,6 @@
         <a href="../Company/employeeDues.php">Salary Payments</a>
         <a href="../Company/paidAdvance.php">Paid Advance</a>
         <a href="../Excel/companyPaidSalaries.php">Paid Salaries</a>
-         <a href="../Excel/companyPaidSalaries.php">Paid Salaries</a>
         <a href="../logout.php">Log Out</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>

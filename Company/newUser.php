@@ -20,11 +20,11 @@ if (isset($_POST['employeeName'])) {
     $jobTitle = $_POST['jobTitle'];
     $email = $_POST['email'];
 
-    $status = $_POST['status'];
+    $status = 'I';
 
     $bankCode = $_POST['bankCode'];
     $branchCode = $_POST['branchCode'];
-    $status1 = $_POST['status1'];
+    $status1 = 'I';
     $accoundHolder = $_POST['accoundHolder'];
     $initiatedDate = $_POST['initiatedDate'];
 
@@ -61,21 +61,21 @@ if (isset($_POST['employeeName'])) {
                     if ($password <> "") {
                         $query2 =
                             "INSERT INTO bankinfo (bankCode,branchCode,accoundHolder,employeeId,status,initiatedDate)
-	                         VALUES('$bankCode','$branchCode','$accoundHolder','$employeeId','$status1','$initiatedDate')";
+	                         VALUES('$bankCode','$branchCode','$accoundHolder','$employeeId','$status1', CURDATE())";
 
                         if (mysqli_query($con, $query2)) {
                         } else {
-                            echo "<script type='text/javascript'>alert('Error In Bank Details');location.href='AddBankDet.php'</script>";
+                            echo "<script type='text/javascript'>alert('Error In Bank Details');location.href='newUser.php'</script>";
                         }
                     } else {
                     }
                 } else {
-                    echo "<script type='text/javascript'>alert('Error In Employee Details');location.href='AddBankDet.php'</script>";
+                    echo "<script type='text/javascript'>alert('Error In Employee Details');location.href='newUser.php'</script>";
                 }
             } else {
             }
 
-            echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='AddBankDet.php'</script>";
+            echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='newUser.php'</script>";
         }
         $query = mysqli_query($con, $query);
     }
@@ -148,15 +148,6 @@ if (isset($_POST['employeeName'])) {
                         <input type="email" name="email" class="form-control" required />
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">Select Status</label>
-                        <select id="status" name="status" class="form-control">
-                            <option value="A">Active</option>
-                            <option value="E">Expired</option>
-                            <option value="I">Initiated</option>
-                            <option value="R">Rejected</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label class="form-control-label">Enter Bank Code</label>
                         <input type="number" name="bankCode" class="form-control" required />
                     </div>
@@ -167,15 +158,6 @@ if (isset($_POST['employeeName'])) {
                     <div class="form-group">
                         <label class="form-control-label">Enter Account Holder</label>
                         <input type="text" name="accoundHolder" class="form-control" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Select Status</label>
-                        <select id="status1" name="status1" class="form-control">
-                            <option value="A">Active</option>
-                            <option value="E">Expired</option>
-                            <option value="I">Initiated</option>
-                            <option value="R">Rejected</option>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Enter initiated Date</label>

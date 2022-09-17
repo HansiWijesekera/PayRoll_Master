@@ -49,14 +49,13 @@ $employeeID = $_SESSION['employeeId'];
                             $cantactNo = $_POST['cantactNo'];
                             $jobTitle = $_POST['jobTitle'];
                             $email = $_POST['email'];
-                            $status = $_POST['status'];
+                        
 
                             $query =
                                 "UPDATE employee set employeeName='" . $employeeName . "', joinDate='" . $joinDate . "', 
                                  address='" . $address . "', nic='" . $nic . "',
                                  dob='" . $dob . "', cantactNo='" . $cantactNo . "', 
-                                 jobTitle='" . $jobTitle . "', email='" . $email . "',
-                                 status='" . $status . "' WHERE userId = $userID";
+                                 jobTitle='" . $jobTitle . "', email='" . $email . "'  WHERE userId = $userID";
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
@@ -104,13 +103,7 @@ $employeeID = $_SESSION['employeeId'];
                             <label class="form-control-label">Enter Email</label>
                             <input type="email" name="email" class="form-control" required value="<?php echo $result['email']; ?>" />
                         </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Select Status</label>
-                            <select id="status" name="status" class="form-control" value="<?php echo $result['status']; ?>">
-                                <option value="Active">Active</option>
-                                <option value="Non-Active">Non-Active</option>
-                            </select>
-                        </div>
+                       
                     <?php
                     }
 
@@ -122,14 +115,12 @@ $employeeID = $_SESSION['employeeId'];
                         if (isset($_POST['bankCode'])) {
                             $bankCode = $_POST['bankCode'];
                             $branchCode = $_POST['branchCode'];
-                            $status1 = $_POST['status1'];
                             $accoundHolder = $_POST['accoundHolder'];
-                            $initiatedDate = $_POST['initiatedDate'];
+                           
 
                             $query1 =
                                 "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', 
-                                 status='" . $status1 . "', accoundHolder='" . $accoundHolder . "',
-                                 initiatedDate='" . $initiatedDate . "'  WHERE employeeId ='" . $employeeId . "'  ";
+                                 status='" . $status1 . "', accoundHolder='" . $accoundHolder . "' WHERE employeeId ='" . $employeeId . "'  ";
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
@@ -156,17 +147,6 @@ $employeeID = $_SESSION['employeeId'];
                         <div class="form-group">
                             <label class="form-control-label">Enter Account Holder</label>
                             <input type="text" name="accoundHolder" class="form-control" value="<?php echo $resultx['accoundHolder']; ?>" required />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Select Status</label>
-                            <select id="status1" name="status1" class="form-control" value="<?php echo $resultx['status']; ?>">
-                                <option value="Active">Active</option>
-                                <option value="Closed">Colosed</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Enter initiated Date</label>
-                            <input type="date" name="initiatedDate" class="form-control" required value="<?php echo $resultx['initiatedDate']; ?>" />
                         </div>
                     <?php
                     }
