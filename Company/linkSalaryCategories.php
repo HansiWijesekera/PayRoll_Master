@@ -11,12 +11,11 @@ $companyID = $_SESSION['companyId'];
 
 if (isset($_POST['code'])) {
     $code = $_POST['code'];
-    $companyId = $companyID;
     $status = "A";
 
     $query =
         "INSERT INTO company_wise_categories(salaryCategoryCode,companyId,status)
-	     VALUES('$code''$companyId','$status')";
+	     VALUES('$code','$companyID','$status')";
 
     if (mysqli_query($con, $query)) {
         echo "<script type='text/javascript'>alert('Code Added Sucessfully');location.href='linkSalaryCategories.php'</script>";
@@ -71,7 +70,6 @@ if (isset($_POST['code'])) {
                             <tr>
                                 <td><?php echo $result['code']; ?></td>
                                 <td><?php echo $result['description']; ?></td>
-
                             </tr>
                         <?php
                         }
