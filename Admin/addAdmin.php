@@ -21,14 +21,13 @@ if (isset($_POST['submit'])) {
 	     VALUES('$userName','$password','$userType')";
 
     if (mysqli_num_rows($res1) > 0) {
-        echo " <script type='text/javascript'>alert('Username Already Registerd');location.href='newCompany.php'</script>";
+        echo " <script type='text/javascript'>alert('Username Already Registerd');location.href='addAdmin.php'</script>";
     } else {
        // $userID = mysqli_insert_id($con);
         if ($query = mysqli_query($con, $query)) {
-                echo " <script type='text/javascript'>alert('Admin Added Succesfully');location.href='../Excel/excelUserUpload.php'</script>";
+                echo " <script type='text/javascript'>alert('Admin Added Succesfully');location.href='addAdmin.php'</script>";
         } else {
         }
-        echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='newCompany.php'</script>";
     }
 }
 ?>
@@ -39,7 +38,6 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="stylex.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="ajax-script.js"></script>
-    <title>Add New User</title>
     <script>
         function myFunction() {
             var x = document.getElementById("password");
@@ -57,7 +55,7 @@ if (isset($_POST['submit'])) {
     <div class="col-lg-7" style="padding: 10%;">
         <div class="card">
             <div class="card-header text-center">
-                <h4>Add New Company</h4>
+                <h4>Add New Admin</h4>
             </div>
 
             <form method="post" enctype="multipart/form-data">
@@ -67,7 +65,7 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="userName" class="form-control" required />
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">Enter Password For User</label>
+                        <label class="form-control-label">Enter Password For Admin</label>
                         <input type="password" name="password" class="form-control" id="password" required />
                         <input type="checkbox" onclick="myFunction()">Show Password
                     </div>
