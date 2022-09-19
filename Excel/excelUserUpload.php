@@ -144,6 +144,14 @@ $companyID = $_SESSION['companyId'];
                         $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
                         $squery1 = mysqli_query($con, $selectQuery1);
                         while (($result1 = mysqli_fetch_assoc($squery1))) {
+                          echo $result1['accountNumber'];
+                        }
+                        ?>
+                  </td>
+                  <td> <?php
+                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                        $squery1 = mysqli_query($con, $selectQuery1);
+                        while (($result1 = mysqli_fetch_assoc($squery1))) {
                           echo $result1['accoundHolder'];
                         }
                         ?>

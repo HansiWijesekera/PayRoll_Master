@@ -7,7 +7,7 @@ $expo_query = "SELECT * FROM errors";
 $result = mysqli_query($con, $expo_query);
 $columnHeader = '';
 $columnHeader = "Employee Name" . "\t" . "Join Date" . "\t" . "Address" . "\t" . "NIC" . "\t" . "Birthday" . "\t" . "Contact No" . "\t" . "Job Title" . "\t" . "Email"
-    . "\t" . "Bank Code" . "\t" . "Short Code" . "\t" . "Account Holder" . "\t" . "User name" . "\t" . "Passoword"
+    . "\t" . "Bank Code" . "\t" . "Short Code" . "\t" . "Account Number" . "\t" . "Account Holder" . "\t" . "User name" . "\t" . "Passoword"
     . "\t"  . "Fix Allowance" . "\t"  . "basic Salary" . "\t" . "Error";
 
 $setData = '';

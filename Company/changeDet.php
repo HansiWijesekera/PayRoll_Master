@@ -21,14 +21,15 @@ $userID = $_SESSION['userID'];
     <title>Add New User</title>
 </head>
 
-<div class="row" style="padding-left: 30%; padding-top: 70px; ">
+<div class="row" style="padding-left: 30%; ">
     <div class="col-lg-7" style="padding: 10%;">
         <div class="card">
             <div class="card-header text-center">
                 <h4>Change Company Datails</h4>
             </div>
 
-            <form method="post" enctype="multipart/form-data">
+
+            <form method="post" enctype="multipart/form-data" id="target">
                 <div class="form-input py-2" style="padding-left: 20px;  border-radius: 5px;background-color: #f2f2f2;padding: 20px;">
                     <?php
                     $selectQuery = "SELECT * FROM company WHERE userId= $userID ";
@@ -80,9 +81,18 @@ $userID = $_SESSION['userID'];
                     <div class="form-group">
                         <input type="submit" class="btnRegister" name="submit" value="Update Details">
                     </div>
-                </div>
-            </form>
 
+                </div>
+            </form><br>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-primary" id="modifyButton">Modify Details</button>
+            </div><br>
+            <script>
+                $("#target :input").prop("disabled", true);
+                $("#modifyButton").click(function() {
+                    $("#target :input").prop("disabled", false);
+                });
+            </script>
         </div>
     </div>
 </div>

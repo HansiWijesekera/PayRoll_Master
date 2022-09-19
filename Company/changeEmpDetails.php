@@ -123,11 +123,12 @@ $id = $_GET['id'];
                         if (isset($_POST['bankCode'])) {
                             $bankCode = $_POST['bankCode'];
                             $branchCode = $_POST['branchCode'];
+                            $accountNumber = $_POST['accountNumber'];
                             $status1 = $_POST['status1'];
                             $accoundHolder = $_POST['accoundHolder'];
 
                             $query1 =
-                                "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', 
+                                "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', accountNumber='" . $accountNumber . "',
                                  status='" . $status1 . "', accoundHolder='" . $accoundHolder . "'
                                  WHERE employeeId ='" . $employeeId . "'  ";
                             // if (count($_POST) > 0) {
@@ -152,6 +153,10 @@ $id = $_GET['id'];
                         <div class="form-group">
                             <label class="form-control-label">Enter Branch code</label>
                             <input type="number" name="branchCode" class="form-control" minlength="4" maxlength="4" value="<?php echo $resultx['branchCode']; ?>" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Enter Account Number</label>
+                            <input type="text" name="accountNumber" class="form-control" value="<?php echo $resultx['accountNumber']; ?>" required />
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Account Holder</label>

@@ -23,14 +23,14 @@ $employeeID = $_SESSION['employeeId'];
     <title>Add New User</title>
 </head>
 
-<div class="row" style="padding-left: 30%; padding-top: 70px; ">
+<div class="row" style="padding-left: 30%;">
     <div class="col-lg-7" style="padding: 10%;">
         <div class="card">
             <div class="card-header text-center">
                 <h4>Change User Datails</h4>
             </div>
 
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" id="target">
                 <div class="form-input py-2" style="padding-left: 20px;  border-radius: 5px;background-color: #f2f2f2;padding: 20px;">
                     <?php
                     $selectQuery = "SELECT * FROM employee WHERE userId= $userID";
@@ -102,7 +102,7 @@ $employeeID = $_SESSION['employeeId'];
                             <label class="form-control-label">Enter Email</label>
                             <input type="email" name="email" class="form-control" required value="<?php echo $result['email']; ?>" />
                         </div>
-    
+
                     <?php
                     }
 
@@ -114,10 +114,11 @@ $employeeID = $_SESSION['employeeId'];
                         if (isset($_POST['bankCode'])) {
                             $bankCode = $_POST['bankCode'];
                             $branchCode = $_POST['branchCode'];
+                            $accountNumber = $_POST['accountNumber'];
                             $accoundHolder = $_POST['accoundHolder'];
 
                             $query1 =
-                                "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "',  accoundHolder='" . $accoundHolder . "' WHERE employeeId ='" . $employeeId . "'  ";
+                                "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "',  accountNumber='" . $accountNumber . "', accoundHolder='" . $accoundHolder . "' WHERE employeeId ='" . $employeeId . "'  ";
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
@@ -142,20 +143,30 @@ $employeeID = $_SESSION['employeeId'];
                             <input type="number" name="branchCode" class="form-control" minlength="4" maxlength="4" value="<?php echo $resultx['branchCode']; ?>" required />
                         </div>
                         <div class="form-group">
+                            <label class="form-control-label">Enter Account Number</label>
+                            <input type="text" name="accountNumber" class="form-control" value="<?php echo $resultx['accountNumber']; ?>" required />
+                        </div>
+                        <div class="form-group">
                             <label class="form-control-label">Enter Account Holder</label>
                             <input type="text" name="accoundHolder" class="form-control" value="<?php echo $resultx['accoundHolder']; ?>" required />
                         </div>
                     <?php
                     }
                     ?>
-
-
                     <div class="form-group">
                         <input type="submit" class="btnRegister" name="submit" value="Update Details">
                     </div>
-
                 </div>
-            </form>
+            </form><br>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-primary" id="modifyButton">Modify Details</button>
+            </div><br>
+            <script>
+                $("#target :input").prop("disabled", true);
+                $("#modifyButton").click(function() {
+                    $("#target :input").prop("disabled", false);
+                });
+            </script>
 
         </div>
     </div>

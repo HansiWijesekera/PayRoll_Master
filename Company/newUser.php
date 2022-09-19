@@ -24,6 +24,7 @@ if (isset($_POST['employeeName'])) {
 
     $bankCode = $_POST['bankCode'];
     $branchCode = $_POST['branchCode'];
+    $accountNumber = $_POST['accountNumber'];
     $status1 = "I";
     $accoundHolder = $_POST['accoundHolder'];
 
@@ -59,8 +60,8 @@ if (isset($_POST['employeeName'])) {
                     $employeeId = mysqli_insert_id($con);
                     if ($password <> "") {
                         $query2 =
-                            "INSERT INTO bankinfo (bankCode,branchCode,accoundHolder,employeeId,status,initiatedDate)
-	                         VALUES('$bankCode','$branchCode','$accoundHolder','$employeeId','$status1', CURDATE())";
+                            "INSERT INTO bankinfo (bankCode,branchCode,accountNumber,accoundHolder,employeeId,status,initiatedDate)
+	                         VALUES('$bankCode','$branchCode','$accountNumber','$accoundHolder','$employeeId','$status1', CURDATE())";
 
                         if (mysqli_query($con, $query2)) {
                         } else {
@@ -173,6 +174,10 @@ if (isset($_POST['employeeName'])) {
                         <div class="form-group">
                             <label class="form-control-label">Enter Account Holder</label>
                             <input type="text" name="accoundHolder" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Enter Account Number</label>
+                            <input type="text" name="accountNumber" class="form-control" required />
                         </div>
                         <!-- <div class="form-group">
                             <label class="form-control-label">Select Status</label>
