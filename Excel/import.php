@@ -42,7 +42,7 @@ if (isset($_POST["import"])) {
 
             $error = [];
 
-            $sql1 = "SELECT userName FROM user WHERE userName='$value[12]'";
+            $sql1 = "SELECT userName FROM user WHERE userName='$value[11]'";
             $res1 = mysqli_query($con, $sql1);
 
             $sql2 = "SELECT email FROM employee WHERE email='$value[7]'";
@@ -75,15 +75,15 @@ if (isset($_POST["import"])) {
             $errors = implode(",", $error);
             if (!empty($error)) {
 
-                $sql = "INSERT INTO errors (a,b,c,d,e,f,g,h,i,j,k,l,m,n,errors) VALUES ('$value[0]','$value[1]','$value[2]','$value[3]',
-                '$value[4]','$value[5]','$value[6]','$value[7]','$value[8]','$value[9]','$value[10]','$value[11]','$value[12]','$value[13]','$errors')";
+                $sql = "INSERT INTO errors (a,b,c,d,e,f,g,h,i,j,k,l,m,errors) VALUES ('$value[0]','$value[1]','$value[2]','$value[3]',
+                '$value[4]','$value[5]','$value[6]','$value[7]','$value[8]','$value[9]','$value[10]','$value[11]','$value[12]','$errors')";
                 if (mysqli_query($con, $sql)) {
                 } else {
                 }
             } else {
-                if (!empty($value[13])) {
-                    $password = md5($value[13]);
-                    $query = "INSERT INTO user(userName,password,userType) VALUES('$value[12]','$password','3')";
+                if (!empty($value[12])) {
+                    $password = md5($value[12]);
+                    $query = "INSERT INTO user(userName,password,userType) VALUES('$value[11]','$password','3')";
                     //    echo 'query === '.$query; exit;
                     $query = mysqli_query($con, $query);
                     $userId = mysqli_insert_id($con);
@@ -99,9 +99,8 @@ if (isset($_POST["import"])) {
                             $employeeId = mysqli_insert_id($con);
 
                             if (!empty($value[0])) {
-                                $initiatedDate =  date('Y-m-d', strtotime($value[11]));
                                 $query2 = "INSERT INTO bankinfo (bankCode,branchCode,accoundHolder,employeeId,status,initiatedDate)
-                                                  VALUES('$value[8]','$value[9]','$value[10]', '$employeeId', 'I','$initiatedDate')";
+                                                  VALUES('$value[8]','$value[9]','$value[10]', '$employeeId', 'I', CURDATE())";
 
                                 if (mysqli_query($con, $query2)) {
                                     echo "<script type='text/javascript'>alert('Data Added Successfully');</script>";
@@ -114,7 +113,6 @@ if (isset($_POST["import"])) {
                             echo "<script type='text/javascript'>alert('Error In Employee Details');</script>";
                         }
                     } else {
-
                         $type = "success";
                         $message = "Excel Data Imported into the Database";
                     }

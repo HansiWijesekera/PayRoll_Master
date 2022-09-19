@@ -66,7 +66,6 @@ if (isset($_POST['code'])) {
                         <tr>
                             <th>Category Name</th>
                             <th>Category Description</th>
-                            <TH></TH>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,11 +77,6 @@ if (isset($_POST['code'])) {
                             <tr>
                                 <td><?php echo $result['code']; ?></td>
                                 <td><?php echo $result['description']; ?></td>
-                                <td>
-                                    <FORM method="post">
-                                        <input type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
-                                    </FORM>
-                                </td>
                             </tr>
                         <?php
                         }
@@ -97,7 +91,7 @@ if (isset($_POST['code'])) {
 
 
 
-        <div class="row" style="padding-left: 30%; padding-top: 70px; ">
+        <div class="row" style="padding-left: 30%; ">
             <div class="col-lg-7" style="padding: 10%;">
                 <div class="card">
                     <div class="card-header text-center">

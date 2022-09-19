@@ -23,9 +23,9 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($res1) > 0) {
         echo " <script type='text/javascript'>alert('Username Already Registerd');location.href='newCompany.php'</script>";
     } else {
-       // $userID = mysqli_insert_id($con);
+        // $userID = mysqli_insert_id($con);
         if ($query = mysqli_query($con, $query)) {
-                echo " <script type='text/javascript'>alert('Admin Added Succesfully');location.href='../Excel/excelUserUpload.php'</script>";
+            echo " <script type='text/javascript'>alert('Admin Added Succesfully');location.href='../Excel/excelUserUpload.php'</script>";
         } else {
         }
         echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='newCompany.php'</script>";
@@ -49,6 +49,14 @@ if (isset($_POST['submit'])) {
                 x.type = "password";
             }
         }
+        $(function() {
+            $('#input1').on('keypress', function(e) {
+                if (e.which == 32) {
+                    alert('UserName can not include spacers');
+                    return false;
+                }
+            });
+        });
     </script>
 
 </head>
@@ -64,7 +72,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-input py-2" style="padding-left: 20px;  border-radius: 5px;background-color: #f2f2f2;padding: 20px;">
                     <div class="form-group">
                         <label class="form-control-label">Enter UserName</label>
-                        <input type="text" name="userName" class="form-control" required />
+                        <input type="text" name="userName" class="form-control" id="input1" required />
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Enter Password For User</label>

@@ -125,17 +125,11 @@ $id = $_GET['id'];
                             $branchCode = $_POST['branchCode'];
                             $status1 = $_POST['status1'];
                             $accoundHolder = $_POST['accoundHolder'];
-                            $initiatedDate = $_POST['initiatedDate'];
 
-<<<<<<< Updated upstream
                             $query1 =
                                 "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', 
-                                 status='" . $status1 . "', accoundHolder='" . $accoundHolder . "',
-                                 initiatedDate='" . $initiatedDate . "'  WHERE employeeId ='" . $employeeId . "'  ";
-=======
-                            $query1 =  "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', 
-                                        status='" . $status1 . "', accoundHolder='" . $accoundHolder . "'  WHERE employeeId ='" . $employeeId . "'  ";
->>>>>>> Stashed changes
+                                 status='" . $status1 . "', accoundHolder='" . $accoundHolder . "'
+                                 WHERE employeeId ='" . $employeeId . "'  ";
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
@@ -171,10 +165,6 @@ $id = $_GET['id'];
                                 <option value="I">Initiated</option>
                                 <option value="R">Rejected</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Enter initiated Date</label>
-                            <input type="date" name="initiatedDate" class="form-control" required value="<?php echo $resultx['initiatedDate']; ?>" />
                         </div>
                     <?php
                     }

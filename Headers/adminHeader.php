@@ -77,8 +77,7 @@
         <a href="../LandingPagers/adminPanel.php">Go to Homepage</a>
         <a href="../Admin/changePwd.php">Change Admin Details</a>
           <a href="../Admin/addAdmin.php">Add New Admin</a>
-        <a href="../Admin/newCompany.php">Add New Company and Employees</a>
-        <a href="../Excel/excelUserUploadCompany.php">Add Employees To company</a>
+        <a href="../Admin/companyPlatform.php">Company Platform</a>
         <a href="../Admin/addSaleryCatrgories.php">Add Salary Categories</a>
         <a href="../Admin/companyDues.php">Company Vise Salary Details</a>
         <a href="../logout.php">Log Out</a>

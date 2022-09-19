@@ -62,6 +62,14 @@ if (isset($_POST['companyName'])) {
                 x.type = "password";
             }
         }
+        $(function() {
+            $('#input1').on('keypress', function(e) {
+                if (e.which == 32) {
+                    alert('UserName can not include spacers');
+                    return false;
+                }
+            });
+        });
     </script>
 
 </head>
@@ -81,7 +89,7 @@ if (isset($_POST['companyName'])) {
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Enter UserName for Company</label>
-                        <input type="text" name="userName" class="form-control" required />
+                        <input type="text" name="userName" class="form-control" id="input1" required />
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Enter salary Day</label>
@@ -89,13 +97,13 @@ if (isset($_POST['companyName'])) {
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Enter BRI</label>
-                        <input type="number" name="BRI" class="form-control" required />
+                        <input type="text" name="BRI" class="form-control" required />
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Select Status</label>
                         <select id="status" name="status" class="form-control">
-                            <option value="Active">Active</option>
-                            <option value="Non-Active">Non-Active</option>
+                            <option value="A">Active</option>
+                            <option value="I">Initiated</option>
                         </select>
                     </div>
                     <div class="form-group">

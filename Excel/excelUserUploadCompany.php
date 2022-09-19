@@ -10,16 +10,13 @@ include '../Headers/adminHeader.php';
 session_start();
 //$companyId = $_SESSION['companyId'] 
 
-if (isset($_POST['companyName'])) {
-  $companyName = $_POST['companyName'];
-}
-
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
   header("location: ../index.php");
   exit();
 }
 
-
+$companyId = $_GET['id'];
+$_SESSION['companyId'] = $companyId;
 ?>
 
 
@@ -47,44 +44,9 @@ if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
 </head>
 
 <body>
-
+  <br>
   <div class="container-fluid">
-
-    <div class="jumbotron text-center">
-
-      <p>Import Employees To company</p>
-      <form method="post">
-        <label class="form-control-label">Select Company For Add Users</label>
-        <div>
-          <?php
-          $queryX = "SELECT * FROM company";
-          $result = $con->query($queryX);
-          if ($result->num_rows > 0) {
-            $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
-          }
-          ?>
-          <select name="companyName" required>
-            <option>Select Company</option>
-            <?php
-            foreach ($options as $option) {
-            ?>
-              <option><?php echo $option['companyName']; ?> </option>
-            <?php
-            }
-            ?>
-          </select>
-
-
-          <input type="submit" class="btnRegister" name="submit" value="Submit">
-
-        </div><br>
-
-      </form>
-
-    </div>
-
     <div class="container">
-
       <div class="form-group text-center border border-warning rounded p-4 mb-5">
 
         <div style="display: inline-flex;">
@@ -140,7 +102,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
               </thead>
               <tbody>
                 <?php
-                $selectQuery = "select * from employee where companyId  =  and status = 'I' ";
+                $selectQuery = "select * from employee where companyId  = $companyId  and status = 'I' ";
                 $squery = mysqli_query($con, $selectQuery);
                 while (($result = mysqli_fetch_assoc($squery))) {
                 ?>

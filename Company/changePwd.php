@@ -13,7 +13,7 @@ if (count($_POST) > 0) {
     $result = mysqli_query($con, "SELECT * from user WHERE userID= $userID");
     $row = mysqli_fetch_array($result);
     if (MD5($_POST["currentPassword"]) == $row["password"]) {
-        mysqli_query($con, "UPDATE user set password = '" .  MD5($_POST["newPassword"]) . "' WHERE userId= 1");
+        mysqli_query($con, "UPDATE user set password = '" .  MD5($_POST["newPassword"]) . "' WHERE userId= $userID");
         echo " <script type='text/javascript'>alert('Password Changed');location.href='../index.php'</script>";
     } else
         echo " <script type='text/javascript'>alert('Current Password Incorrect');location.href='changePwd.php'</script>";
@@ -23,6 +23,9 @@ if (count($_POST) > 0) {
 
 <head>
     <title>Change Password</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="ajax-script.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script>
         function validatePassword() {
@@ -58,32 +61,45 @@ if (count($_POST) > 0) {
 </head>
 
 <body>
-    <form name="frmChange" method="post" action="" onSubmit="return validatePassword()">
-        <div style="width: 500px;">
-            <div class="message"><?php if (isset($message)) {
-                                        echo $message;
-                                    } ?></div>
-            <table border="0" cellpadding="10" cellspacing="0" width="500" align="center" class="tblSaveForm">
-                <tr class="tableheader">
-                    <td colspan="2">Change Password</td>
-                </tr>
-                <tr>
-                    <td width="40%"><label>Current Password</label></td>
-                    <td width="60%"><input type="password" name="currentPassword" class="txtField" /><span id="currentPassword" class="required"></span></td>
-                </tr>
-                <tr>
-                    <td><label>New Password</label></td>
-                    <td><input type="password" name="newPassword" class="txtField" /><span id="newPassword" class="required"></span></td>
-                </tr>
-                <td><label>Confirm Password</label></td>
-                <td><input type="password" name="confirmPassword" class="txtField" /><span id="confirmPassword" class="required"></span></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" name="submit" value="Submit" class="btnSubmit"></td>
-                </tr>
-            </table>
+
+
+    <div class="row" style="padding-left: 30%; padding-top: 70px; ">
+        <div class="col-lg-7" style="padding: 10%;">
+            <div class="card" style="width: 450px;">
+                <div class="card-header text-center">
+                    <h4>Change Password</h4>
+                </div>
+
+                <form name="frmChange" method="post" action="" onSubmit="return validatePassword()">
+                    <div style="width: 500px;">
+                        <div class="message"><?php if (isset($message)) {
+                                                    echo $message;
+                                                } ?></div>
+                        <table border="0" cellpadding="10" cellspacing="0" width="500" align="center" class="tblSaveForm">
+                            <tr class="tableheader">
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td width="40%"><label>Current Password</label></td>
+                                <td width="60%"><input type="password" name="currentPassword" class="txtField" /><span id="currentPassword" class="required"></span></td>
+                            </tr>
+                            <tr>
+                                <td><label>New Password</label></td>
+                                <td><input type="password" name="newPassword" class="txtField" /><span id="newPassword" class="required"></span></td>
+                            </tr>
+                            <td><label>Confirm Password</label></td>
+                            <td><input type="password" name="confirmPassword" class="txtField" /><span id="confirmPassword" class="required"></span></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="submit" name="submit" value="Submit" class="btnSubmit"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+
+            </div>
         </div>
-    </form>
+    </div>
 </body>
 
 </html>
