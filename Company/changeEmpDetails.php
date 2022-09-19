@@ -127,10 +127,15 @@ $id = $_GET['id'];
                             $accoundHolder = $_POST['accoundHolder'];
                             $initiatedDate = $_POST['initiatedDate'];
 
+<<<<<<< Updated upstream
                             $query1 =
                                 "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', 
                                  status='" . $status1 . "', accoundHolder='" . $accoundHolder . "',
                                  initiatedDate='" . $initiatedDate . "'  WHERE employeeId ='" . $employeeId . "'  ";
+=======
+                            $query1 =  "UPDATE bankinfo set bankCode='" . $bankCode . "', branchCode='" . $branchCode . "', 
+                                        status='" . $status1 . "', accoundHolder='" . $accoundHolder . "'  WHERE employeeId ='" . $employeeId . "'  ";
+>>>>>>> Stashed changes
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
