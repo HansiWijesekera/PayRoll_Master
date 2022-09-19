@@ -2,19 +2,14 @@
 
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-include '../dbconn.php';
-include '../Headers/adminHeader.php';
+include '../../dbconn.php';
+include '../../Headers/adminHeader.php';
 session_start();
-
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
-    header("location: ../index.php");
+    header("location: ../../index.php");
     exit();
 }
-
-$userID = $_SESSION['userID'];
-
-$today = DATE("Y-m-d");
-echo $today;
+$id  = $_GET['id'];
 
 ?>
 
@@ -24,6 +19,7 @@ echo $today;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
@@ -37,39 +33,44 @@ echo $today;
         <div class="container">
             <div class="row mb-2">
                 <div class="col-md-9">
-                    <h1>Company vise Due Amounts</h1>
+                    <h1>Due Amounts</h1>
                 </div>
             </div>
             <div class="table-responsive">
                 <table id="tblUser1">
                     <thead>
                         <tr>
-                            <th>Company Id</th>
-                            <th>Company Name</th>
-                            <th>Due Amount</th>
+                            <th>Salary Number</th>
+                            <th>Employee Name</th>
+                            <th>Payble Amount</th>
+                            <th>Paid Amount</th>
+                            <th>Remaining Amount</th>
                             <th>Due Date</th>
-                            <th>Action
-                            <th>
+                            <th>Paid Date</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $selectQuery1 = "select SUM(salary.payableAmount - ifnull(salary.settledAmount,0)),salary.dueDate,company.companyName,company.companyId FROM company INNER JOIN ( salary inner join employee on salary.employeeId = employee.employeeId ) 
-                                         ON company.companyId = employee.companyId
-                                         where salary.dueDate <= CURDATE() and (salary.payableAmount - ifnull(salary.settledAmount,0)) > 0 
-                                         GROUP BY employee.companyId; ";
+                        $selectQuery1 = "select * from salary inner join employee on salary.employeeId = employee.employeeId 
+                        where salary.dueDate <= CURDATE() and employee.companyId = $id  and (salary.payableAmount - ifnull(salary.settledAmount,0)) > 0 ";
                         $squery1 = mysqli_query($con, $selectQuery1);
-                        while (($result1 = mysqli_fetch_row($squery1))) {
+                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                            $salaryId = $result1['salaryID'];
                         ?>
                             <tr>
-                                <td><?php echo $result1[3]; ?></td>
-                                <td><?php echo $result1[2]; ?></td>
-                                <td><?php echo $result1[0]; ?></td>
-                                <td><?php echo $result1[1]; ?></td>
-                                <td><a href="SalaryDet/employeeVice.php?id=<?php echo $result1[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
-                            <?php
+                                <td><?php echo $result1['salaryNo']; ?></td>
+                                <td><?php echo $result1['employeeName']; ?></td>
+                                <td><?php echo $result1['payableAmount']; ?></td>
+                                <td><?php echo $result1['settledAmount']; ?></td>
+                                <td><?php echo ($result1['payableAmount'] - $result1['settledAmount']); ?></td>
+                                <td><?php echo $result1['dueDate']; ?></td>
+                                <td><?php echo $result1['paidDate']; ?></td>
+                             
+                            </tr>
+                        <?php
                         }
-                            ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -85,31 +86,34 @@ echo $today;
                 <table id="tblUser">
                     <thead>
                         <tr>
-                            <th>Company Id</th>
-                            <th>Company Name</th>
-                            <th>Due Amount</th>
+                            <th>Salary Number</th>
+                            <th>Employee Name</th>
+                            <th>Payble Amount</th>
+                            <th>Paid Amount</th>
+                            <th>Remaining Amount</th>
                             <th>Due Date</th>
-                            <th>Action
-                            <th>
+                            <th>Paid Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $selectQuery = "select SUM(salary.payableAmount - ifnull(salary.settledAmount,0)),salary.dueDate,company.companyName,company.companyId FROM company INNER JOIN ( salary inner join employee on salary.employeeId = employee.employeeId ) 
-                                         ON company.companyId = employee.companyId
-                                         where salary.dueDate > CURDATE() GROUP BY employee.companyId; ";
+                        $selectQuery = "select * from salary inner join employee on salary.employeeId = employee.employeeId 
+                        where salary.dueDate > CURDATE() and employee.companyId = $id and (salary.payableAmount - ifnull(salary.settledAmount,0)) > 0 ";
                         $squery = mysqli_query($con, $selectQuery);
-                        while (($result = mysqli_fetch_row($squery))) {
+                        while (($result = mysqli_fetch_assoc($squery))) {
                         ?>
                             <tr>
-                                <td><?php echo $result[3]; ?></td>
-                                <td><?php echo $result[2]; ?></td>
-                                <td><?php echo $result[0]; ?></td>
-                                <td><?php echo $result[1]; ?></td>
-                                <td><a href="SalaryDet/employeeVice.php?id=<?php echo $result[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
-                            <?php
+                                <td><?php echo $result['salaryNo']; ?></td>
+                                <td><?php echo $result['employeeName']; ?></td>
+                                <td><?php echo $result['payableAmount']; ?></td>
+                                <td><?php echo $result['settledAmount']; ?></td>
+                                <td><?php echo ($result['payableAmount'] - $result['settledAmount']); ?></td>
+                                <td><?php echo $result['dueDate']; ?></td>
+                                <td><?php echo $result['paidDate']; ?></td>
+                            </tr>
+                        <?php
                         }
-                            ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
