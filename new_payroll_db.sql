@@ -14,10 +14,10 @@
 
 -- Dumping data for table payroll.bankinfo: ~3 rows (approximately)
 /*!40000 ALTER TABLE `bankinfo` DISABLE KEYS */;
-INSERT INTO `bankinfo` (`bankInfoId`, `bankCode`, `branchCode`, `accoundHolder`, `accountNo`, `employeeId`, `status`, `initiatedDate`) VALUES
-	(1, '7432', '3421', 'Kalpa ayia', '23223233', 1, 'A', '2022-09-18'),
-	(2, '7432', '4342', 'Toshan Beya', '43234234', 2, 'A', '2022-09-18'),
-	(3, '7432', '4232', 'Addesha', '43224334', 3, 'A', '2022-09-18');
+INSERT INTO `bankinfo` (`bankInfoId`, `bankCode`, `branchCode`, `accoundHolder`, `accountNumber`, `employeeId`, `status`, `initiatedDate`) VALUES
+	(1, '7432', '3421', 'Kalpa ayia', '7010', '368', 'A', '2022-09-18'),
+	(2, '7432', '4342', 'Toshan Beya', '7010', '368', 'A', '2022-09-18'),
+	(3, '7432', '4232', 'Addesha', '7010', '368', 'A', '2022-09-18');
 /*!40000 ALTER TABLE `bankinfo` ENABLE KEYS */;
 
 -- Dumping data for table payroll.company: ~2 rows (approximately)
