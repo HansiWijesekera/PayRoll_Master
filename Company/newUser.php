@@ -22,7 +22,7 @@ if (isset($_POST['employeeName'])) {
 
     $status = "I";
 
-    $bankCode = $_POST['bankCode'];
+    $bankCode = substr($_POST['bankCode'], 0, 4);
     $branchCode = $_POST['branchCode'];
     $accountNumber = $_POST['accountNumber'];
     $status1 = "I";
@@ -110,7 +110,7 @@ if (isset($_POST['employeeName'])) {
 
 </head>
 <div class='add-new-employee'>
-    <div class="row" style="padding-left: 30%; padding-top: 70px; ">
+    <div class="row" style="padding-left: 30%;">
         <div class="col-lg-7" style="padding: 10%;">
             <div class="card">
                 <div class="card-header text-center">
@@ -163,13 +163,31 @@ if (isset($_POST['employeeName'])) {
                                 <option value="R">Rejected</option>
                             </select>
                         </div> -->
-                        <div class="form-group">
+                         <div class="form-group">
                             <label class="form-control-label">Enter Bank Code</label>
-                            <input type="number" name="bankCode" class="form-control" required />
+                            <div>
+                                <?php
+                                $queryX = "SELECT * FROM ref_bank";
+                                $result = $con->query($queryX);
+                                if ($result->num_rows > 0) {
+                                    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                                }
+                                ?>
+                                <select name="bankCode" value="" style="width:101%; height: 200%;" required>
+                                    <option>Select Bank Code</option>
+                                    <?php
+                                    foreach ($options as $option) {
+                                    ?>
+                                        <option><?php echo $option['bankCode']; ?> <?php echo ' - ' . $option['bankName']; ?> </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Branch code</label>
-                            <input type="number" name="branchCode" class="form-control" minlength="4" maxlength="4" required />
+                            <input type="number" name="branchCode" class="form-control" min="0" max="999" required />
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Account Holder</label>

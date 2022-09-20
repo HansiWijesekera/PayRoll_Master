@@ -112,7 +112,7 @@ $employeeID = $_SESSION['employeeId'];
                     while (($resultx = mysqli_fetch_assoc($squery1))) {
 
                         if (isset($_POST['bankCode'])) {
-                            $bankCode = $_POST['bankCode'];
+                            $bankCode = substr($_POST['bankCode'], 0, 4);
                             $branchCode = $_POST['branchCode'];
                             $accountNumber = $_POST['accountNumber'];
                             $accoundHolder = $_POST['accoundHolder'];
@@ -136,11 +136,29 @@ $employeeID = $_SESSION['employeeId'];
                     ?>
                         <div class="form-group">
                             <label class="form-control-label">Enter Bank Code</label>
-                            <input type="number" name="bankCode" class="form-control" value="<?php echo $resultx['bankCode']; ?>" required />
+                            <div>
+                                <?php
+                                $queryX = "SELECT * FROM ref_bank";
+                                $result = $con->query($queryX);
+                                if ($result->num_rows > 0) {
+                                    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                                }
+                                ?>
+                                <select name="bankCode" value="" style="width:101%; height: 200%;" required>
+                                    <option><?php echo $resultx['bankCode']; ?></option>
+                                    <?php
+                                    foreach ($options as $option) {
+                                    ?>
+                                        <option><?php echo $option['bankCode']; ?> <?php echo ' - ' . $option['bankName']; ?> </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Branch code</label>
-                            <input type="number" name="branchCode" class="form-control" minlength="4" maxlength="4" value="<?php echo $resultx['branchCode']; ?>" required />
+                            <input type="number" name="branchCode" class="form-control" min="0" max="999" value="<?php echo $resultx['branchCode']; ?>" required />
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Account Number</label>
@@ -160,11 +178,15 @@ $employeeID = $_SESSION['employeeId'];
             </form><br>
             <div style="text-align: center;">
                 <button type="button" class="btn btn-primary" id="modifyButton">Modify Details</button>
+                <button type="button" class="btn btn-primary" id="goback">Go back</button>
             </div><br>
             <script>
                 $("#target :input").prop("disabled", true);
                 $("#modifyButton").click(function() {
                     $("#target :input").prop("disabled", false);
+                });
+                $("#goback").click(function() {
+                    $("#target :input").prop("disabled", true);
                 });
             </script>
 

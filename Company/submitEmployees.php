@@ -87,8 +87,9 @@ if (isset($_POST['reject'])) {
                             <th>Contact No</th>
                             <th>Job Title</th>
                             <th>Email</th>
-                            <th>Bank Code</th>
+                            <th>BankDetails</th>
                             <th>Branch Code</th>
+                            <th>Account Number</th>
                             <th>Account Holder</th>
                             <th>Initiated Date</th>
 
@@ -114,10 +115,10 @@ if (isset($_POST['reject'])) {
                                 <td><?php echo $result['jobTitle']; ?></td>
                                 <td><?php echo $result['email']; ?></td>
                                 <td> <?php
-                                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                                        $selectQuery1 = "SELECT * FROM  bankinfo inner join ref_bank on bankinfo.bankCode = ref_bank.bankCode WHERE bankinfo.employeeId = '$empid' ";
                                         $squery1 = mysqli_query($con, $selectQuery1);
                                         while (($result1 = mysqli_fetch_assoc($squery1))) {
-                                            echo $result1['bankCode'];
+                                            echo $result1['bankCode'] . " - " . $result1['bankName'];
                                         }
                                         ?>
                                 </td>
@@ -126,6 +127,14 @@ if (isset($_POST['reject'])) {
                                         $squery1 = mysqli_query($con, $selectQuery1);
                                         while (($result1 = mysqli_fetch_assoc($squery1))) {
                                             echo $result1['branchCode'];
+                                        }
+                                        ?>
+                                </td>
+                                <td> <?php
+                                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                                        $squery1 = mysqli_query($con, $selectQuery1);
+                                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                                            echo $result1['accountNumber'];
                                         }
                                         ?>
                                 </td>

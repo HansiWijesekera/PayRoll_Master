@@ -86,11 +86,15 @@ $userID = $_SESSION['userID'];
             </form><br>
             <div style="text-align: center;">
                 <button type="button" class="btn btn-primary" id="modifyButton">Modify Details</button>
+                <button type="button" class="btn btn-primary" id="goback">Go Back</button>
             </div><br>
             <script>
                 $("#target :input").prop("disabled", true);
                 $("#modifyButton").click(function() {
                     $("#target :input").prop("disabled", false);
+                });
+                $("#goback").click(function() {
+                    $("#target :input").prop("disabled", true);
                 });
             </script>
         </div>

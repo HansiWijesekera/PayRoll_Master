@@ -19,6 +19,8 @@ $id = $_GET['id'];
     <link rel="stylesheet" href="stylex.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="ajax-script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Add New User</title>
 </head>
 
@@ -55,7 +57,7 @@ $id = $_GET['id'];
                                  address='" . $address . "', nic='" . $nic . "',
                                  dob='" . $dob . "', cantactNo='" . $cantactNo . "', 
                                  jobTitle='" . $jobTitle . "', email='" . $email . "',
-                                 status='" . $status . "' WHERE userId = $userID";
+                                 status='" . $status . "' WHERE employeeId = $id ";
                             // if (count($_POST) > 0) {
                             //    mysqli_query($con, "UPDATE employee set companyName='" . $companyName . "', salaryDate='" . $salaryDate . "', 
                             //    BRI='" . $BRI . "', status='" . $status . "' WHERE userId = 13");
@@ -121,7 +123,8 @@ $id = $_GET['id'];
                     while (($resultx = mysqli_fetch_assoc($squery1))) {
 
                         if (isset($_POST['bankCode'])) {
-                            $bankCode = $_POST['bankCode'];
+                            //substr($myStr, 0, 5);
+                            $bankCode = substr($_POST['bankCode'],0,4);
                             $branchCode = $_POST['branchCode'];
                             $accountNumber = $_POST['accountNumber'];
                             $status1 = $_POST['status1'];
@@ -148,11 +151,29 @@ $id = $_GET['id'];
                     ?>
                         <div class="form-group">
                             <label class="form-control-label">Enter Bank Code</label>
-                            <input type="number" name="bankCode" class="form-control" value="<?php echo $resultx['bankCode']; ?>" required />
+                            <div>
+                                <?php
+                                $queryX = "SELECT * FROM ref_bank";
+                                $result = $con->query($queryX);
+                                if ($result->num_rows > 0) {
+                                    $options = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                                }
+                                ?>
+                                <select name="bankCode" value="" style="width:101%; height: 200%;" required>
+                                    <option><?php echo $resultx['bankCode']; ?></option>
+                                    <?php
+                                    foreach ($options as $option) {
+                                    ?>
+                                        <option><?php echo $option['bankCode']; ?> <?php echo ' - ' . $option['bankName']; ?> </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Branch code</label>
-                            <input type="number" name="branchCode" class="form-control" minlength="4" maxlength="4" value="<?php echo $resultx['branchCode']; ?>" required />
+                            <input type="number" name="branchCode" class="form-control" min="0" max="999" value="<?php echo $resultx['branchCode']; ?>" required />
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Account Number</label>

@@ -54,6 +54,13 @@ if (isset($_POST["import"])) {
             $sql4 = "SELECT nic FROM employee WHERE nic='$value[3]'";
             $res4 = mysqli_query($con, $sql4);
 
+            //$sql5 = "SELECT bankCode FROM ref_bank WHERE bankCode ='$value[8]'";
+           // $res5 = mysqli_query($con, $sql5);
+
+           // $sql6 = "SELECT branchCode FROM bankbranch WHERE bankCode ='$value[8]' and branchCode ='$value[9]'";
+           // $res6 = mysqli_query($con, $sql6);
+
+
             if (!empty($res1) && mysqli_num_rows($res1) > 0) {
                 $suggesedPassword =  implode("-", mysqli_fetch_assoc($res1));
                 $error['0'] = "Duplicate Username - " . $suggesedPassword . " | Suggesed Password - " . $suggesedPassword . substr($value[3], 0, 2);
@@ -71,10 +78,16 @@ if (isset($_POST["import"])) {
                 $error['3'] = "Duplicate NIC - " . implode("-", mysqli_fetch_assoc($res4)) . " ";
             }
 
+           // if (mysqli_num_rows($res5) < 1) {
+            //    $error['4'] = "Bank Code Doesn't Exist" . implode("-", mysqli_fetch_assoc($res5)) . " ";
+            //}
+
+           // if (mysqli_num_rows($res6) < 1) {
+           //     $error['5'] = "Branch Code Doesn't Match to Bank Code" . implode("-", mysqli_fetch_assoc($res6)) . " ";
+           // }
 
             $errors = implode(",", $error);
             if (!empty($error)) {
-
                 $sql = "INSERT INTO errors (a,b,c,d,e,f,g,h,i,j,k,l,m,n,errors) VALUES ('$value[0]','$value[1]','$value[2]','$value[3]',
                 '$value[4]','$value[5]','$value[6]','$value[7]','$value[8]','$value[9]','$value[10]','$value[11]','$value[12]','$value[13]','$errors')";
                 if (mysqli_query($con, $sql)) {
