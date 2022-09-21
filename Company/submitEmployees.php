@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $updateQuery = "UPDATE employee,bankinfo set employee.status = 'A' , bankinfo.status = 'A' 
     WHERE employee.employeeId = bankinfo.employeeId  and employee.status = 'I' and bankinfo.status = 'I' and employee.companyId = $companyID";
     if (mysqli_query($con, $updateQuery)) {
-        echo " <script type='text/javascript'>alert('Employee Details Submitted Sucessfully');location.href='submitEmployees.php'</script>";
+        echo " <script type='text/javascript'>alert('Employee Details Submitted Sucessfully');location.href='viewEmployees.php'</script>";
     } else {
         echo " <script type='text/javascript'>alert('Error In Submitting Details');location.href='submitEmployees.php'</script>";
     }
@@ -31,7 +31,7 @@ if (isset($_POST['reject'])) {
     $updateQuery = "UPDATE employee,bankinfo set employee.status = 'R' , bankinfo.status = 'R' 
     WHERE employee.employeeId = bankinfo.employeeId  and employee.status = 'I' and bankinfo.status = 'I' and employee.companyId = $companyID";
     if (mysqli_query($con, $updateQuery)) {
-        echo " <script type='text/javascript'>alert('Employee Details Rejected Sucessfully');location.href='submitEmployees.php'</script>";
+        echo " <script type='text/javascript'>alert('Employee Details Rejected Sucessfully');location.href='viewEmployees.php'</script>";
     } else {
         echo " <script type='text/javascript'>alert('Error In Rejecting Details');location.href='submitEmployees.php'</script>";
     }
@@ -68,6 +68,7 @@ if (isset($_POST['reject'])) {
 <body>
     <div class="container-fluid" style="margin-top:30px !important;">
         <div class="container">
+            <a href="viewEmployees.php" class="btn btn-primary btn-sm"> Go back</a><br><br>
             <div class="row mb-2">
                 <div class="col-md-9">
                     <h1>Uploaded Employees</h1>
@@ -92,6 +93,7 @@ if (isset($_POST['reject'])) {
                             <th>Account Number</th>
                             <th>Account Holder</th>
                             <th>Initiated Date</th>
+                            <th>Action</th>
 
                             </th>
 
@@ -153,6 +155,10 @@ if (isset($_POST['reject'])) {
                                             echo $result1['initiatedDate'];
                                         }
                                         ?>
+                                </td>
+                                <td>
+                                    <a href="EmployeePlatform/submit.php?id=<?php echo $empid; ?>" class="btn btn-primary btn-sm">Approve</a>
+                                    <a href="EmployeePlatform/reject.php?id=<?php echo $empid; ?>" class="btn btn-danger btn-sm">Reject</a>
                                 </td>
                             </tr>
                         <?php

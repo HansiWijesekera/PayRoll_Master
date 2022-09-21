@@ -30,7 +30,7 @@ $companyID = $_SESSION['companyId'];
         <div class="container">
             <div class="row mb-2">
                 <div class="col-md-9">
-                    <h1>Salary Advance Requests</h1>
+                    <h1>Salary Pending Payments</h1>
                 </div>
             </div>
             <div class="table-responsive">

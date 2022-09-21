@@ -78,11 +78,9 @@
         <a href="../LandingPagers/companyPanel.php">Go to Homepage</a>
         <a href="../Company/changeDet.php">Change Company Details</a>
         <a href="../Company/changePwd.php">Change Company Password</a>
-        <a href="../Company/newUser.php">Create New Employees</a>
-        <a href="../Company/viewEmployees.php">View And Modify Employees</a>
+        <a href="../Company/viewEmployees.php">Employee Platform</a>
         <a href="../Company/linkSalaryCategories.php">Link Salary Categories</a>
         <a href="../Company/employeeSalaries.php">Salary Initiation</a>
-        <a href="../Company/submitEmployees.php">Approve Employees</a>
         <a href="../Company/viewAdvance.php">Approve Advance</a>
         <a href="../Company/payAdvance.php">Advance Payment</a>
         <a href="../Company/employeeDues.php">Salary Payments</a>

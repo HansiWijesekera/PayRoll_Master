@@ -29,10 +29,15 @@ if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
 
     </script>
     <div class="container-fluid" style="margin-top:30px !important;">
+
         <div class="container">
+
             <div class="row mb-2">
-                <div class="col-md-9">
+                <div class="col-md-6">
                     <h1>Registerd Companies</h1>
+                </div>
+                <div class="col-md-6" style="text-align: right;">
+                    <a href="newCompany.php" class="btn btn-primary btn-sm"> Add New Company</a><br><br>
                 </div>
             </div>
             <div class="table-responsive">
@@ -61,9 +66,9 @@ if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
                                 <td><?php echo $result['status']; ?></td>
                                 <td>
                                     <?php if ($result['status'] == "E") {
-                                        ?>
-                                           <a href="editCompany.php?id=<?php echo $result['companyId']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>
-                                        <?php
+                                    ?>
+                                        <a href="editCompany.php?id=<?php echo $result['companyId']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>
+                                    <?php
                                     } else {
                                     ?>
                                         <a href="editCompany.php?id=<?php echo $result['companyId']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a>
@@ -82,7 +87,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
                 </table>
             </div>
 
-            <a href="newCompany.php" class="btn btn-primary btn-sm"> Add New Company</a>
+
         </div>
     </div>
 

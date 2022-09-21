@@ -75,7 +75,7 @@ if (isset($_POST['employeeName'])) {
             } else {
             }
 
-            echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='newUser.php'</script>";
+            echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='viewEmployees.php'</script>";
         }
         $query = mysqli_query($con, $query);
     }

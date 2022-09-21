@@ -29,9 +29,13 @@ $companyID = $_SESSION['companyId'];
 
     <div class="container-fluid" style="margin-top:30px !important;">
         <div class="container">
-            <div class="row mb-2">
-                <div class="col-md-9">
+            <div class="row 2">
+                <div class="col-8">
                     <h1>Company Employees</h1>
+                </div>
+                <div class="col-4" style="text-align: center;">
+                    <a href="newUser.php" class="btn btn-primary btn-sm"> Add New Employee</a>
+                    <a href="submitEmployees.php" class="btn btn-primary btn-sm"> Approve Employees</a><br><br>
                 </div>
             </div>
             <div class="table-responsive">
@@ -82,7 +86,6 @@ $companyID = $_SESSION['companyId'];
                                         $squery1 = mysqli_query($con, $selectQuery1);
                                         while (($result1 = mysqli_fetch_assoc($squery1))) {
                                             echo $result1['bankCode'] . " - " . $result1['bankName'];
-                                        
                                         }
                                         ?>
                                 </td>
