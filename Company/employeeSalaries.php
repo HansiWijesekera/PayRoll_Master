@@ -132,7 +132,7 @@
                                                 }
                                             } else {
                                                 echo "<td>";
-                                    ?>
+                                            ?>
                                                 <input type="number" class="input-value <?php echo $fetchedCategory['code']; ?>" name="<?php echo $fetchedCategory['code'] . $fetchedEmp['employeeId']; ?>" />
                                             <?php
                                                 echo "</td>";
@@ -147,9 +147,11 @@
                                     <?php
                                         }
 
-                                        echo "<td>";
-                                        echo $cate_wise_salary;
-                                        echo "</td>";
+                                        if($cate_wise_salary != 0){
+                                            echo "<td>";
+                                            echo $cate_wise_salary;
+                                            echo "</td>";
+                                        }
 
                                         if ($fetchedCategory['type'] == 'Addition') {
                                             $totalSalary += $cate_wise_salary;
