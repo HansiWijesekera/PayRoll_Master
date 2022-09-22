@@ -47,7 +47,7 @@ $resultx = mysqli_fetch_row($squery);
     <div class="card">
         <div class="container-fluid">
             <form method="post">
-                <label class="form-control-label">Please Select  Company</label>
+                <label class="form-control-label">Please Select Company</label>
                 <div>
                     <?php
                     $queryX = "SELECT * FROM company";
@@ -122,7 +122,7 @@ $resultx = mysqli_fetch_row($squery);
             </tbody>
         </table>
         <form action="duesExport.php" method="post">
-            <input type="submit" name="submit" value="Export To Excel">
+            <input type="submit" name="submit" class="btn btn-primary btn-sm" value="Export To Excel">
         </form>
     </div>
 </div>

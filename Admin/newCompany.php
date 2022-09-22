@@ -113,7 +113,7 @@ if (isset($_POST['companyName'])) {
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btnRegister" name="submit" value="Add Company">
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Company">
                     </div>
 
                 </div>

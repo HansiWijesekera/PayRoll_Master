@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
     <div class="col-lg-7" style="padding: 10%;">
         <div class="card">
             <div class="card-header text-center">
-                <h4>Add New Company</h4>
+                <h4>Add New Admin</h4>
             </div>
 
             <form method="post" enctype="multipart/form-data">
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btnRegister" name="submit" value="Add Company">
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Admin">
                     </div>
 
                 </div>

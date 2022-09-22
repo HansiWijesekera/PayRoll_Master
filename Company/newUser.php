@@ -163,7 +163,7 @@ if (isset($_POST['employeeName'])) {
                                 <option value="R">Rejected</option>
                             </select>
                         </div> -->
-                         <div class="form-group">
+                        <div class="form-group">
                             <label class="form-control-label">Enter Bank Code</label>
                             <div>
                                 <?php
@@ -213,7 +213,7 @@ if (isset($_POST['employeeName'])) {
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" class="btnRegister" name="submit" value="Add User">
+                            <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add User">
                         </div>
                     </div>
                 </form>

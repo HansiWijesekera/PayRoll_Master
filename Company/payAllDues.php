@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
             <form method="post" enctype="multipart/form-data">
                 <div class="form-input py-2" style="padding-left: 20px;  border-radius: 5px;background-color: #f2f2f2;padding: 20px;">
                     <div class="form-group">
-                        <input type="submit" class="btnRegister" name="submit" value="Submit Payment" onclick="clicked(event)">
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Payment" onclick="clicked(event)">
                         <script>
                             function clicked(e) {
                                 if (!confirm('Press OK to confirm the payment')) {

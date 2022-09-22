@@ -67,7 +67,7 @@ echo $today;
                                 <td><?php echo $result1[2]; ?></td>
                                 <td><?php echo $result1[0]; ?></td>
                                 <td><?php echo $result1[1]; ?></td>
-                                <td><a href="SalaryDet/employeeVice.php?id=<?php echo $result1[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
+                                <td><a href="employeeVice.php?id=<?php echo $result1[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
                             <?php
                         }
                             ?>
@@ -107,7 +107,7 @@ echo $today;
                                 <td><?php echo $result[2]; ?></td>
                                 <td><?php echo $result[0]; ?></td>
                                 <td><?php echo $result[1]; ?></td>
-                                <td><a href="SalaryDet/employeeVice.php?id=<?php echo $result[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
+                                <td><a href="employeeVice.php?id=<?php echo $result[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
                             <?php
                         }
                             ?>

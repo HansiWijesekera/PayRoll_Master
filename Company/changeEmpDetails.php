@@ -124,7 +124,7 @@ $id = $_GET['id'];
 
                         if (isset($_POST['bankCode'])) {
                             //substr($myStr, 0, 5);
-                            $bankCode = substr($_POST['bankCode'],0,4);
+                            $bankCode = substr($_POST['bankCode'], 0, 4);
                             $branchCode = $_POST['branchCode'];
                             $accountNumber = $_POST['accountNumber'];
                             $status1 = $_POST['status1'];
@@ -198,7 +198,7 @@ $id = $_GET['id'];
 
 
                     <div class="form-group">
-                        <input type="submit" class="btnRegister" name="submit" value="Update Details">
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Update Details">
                     </div>
 
                 </div>
