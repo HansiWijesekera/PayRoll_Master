@@ -30,7 +30,6 @@ $companyID = $_SESSION['companyId'];
     <script type="text/javascript">
         jQuery(document).ready(function() {
             var table = $('#tblUser').DataTable({
-                scrollY: "400px",
                 scrollX: true,
                 scrollCollapse: false,
                 fixedColumns: {

@@ -70,6 +70,7 @@ if (isset($_POST['companyName'])) {
                 }
             });
         });
+       
     </script>
 
 </head>

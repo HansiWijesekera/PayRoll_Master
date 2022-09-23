@@ -69,7 +69,6 @@ if (isset($_POST['reject'])) {
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 var table = $('#tblUser').DataTable({
-                    scrollY: "400px",
                     scrollX: true,
                     scrollCollapse: false,
                     fixedColumns: {

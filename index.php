@@ -21,7 +21,7 @@ if (isset($_POST['userName'])) {
 
         header('location:role.php');
     } else{
-        echo "<script type='text/javascript'>alert('Account Invalid Please Contact Admin');</script>";
+        echo "<script type='text/javascript'>alert('Incorrect User Name or Password');</script>";
     }
 }
 ?>

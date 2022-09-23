@@ -22,6 +22,7 @@ $id = $_GET['id'];
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Add New User</title>
+
 </head>
 
 <div class="row" style="padding-left: 30%; padding-top: 70px; ">
@@ -87,7 +88,44 @@ $id = $_GET['id'];
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter NIC</label>
-                            <input type="text" name="nic" class="form-control" minlength="10" maxlength="12" value="<?php echo $result['nic']; ?>" required />
+                            <input type="text" name="nic" id="nic" class="form-control" minlength="10" maxlength="12" value="<?php echo $result['nic']; ?>" required />
+                            <script>
+                                $(document).ready(function() {
+                                    $('#nic').change(function(e) {
+                                        const nic = $(this).val();
+                                        // should be requred
+                                        if (nic == '') {
+                                            alert('Nic requred');
+                                        }
+                                        // if length 10 
+                                        else if (nic.length == 10) {
+                                            // last letter should be X or V
+                                            const lastLetter = nic[nic.length - 1];
+                                            const numbers = nic.slice(0, nic.length - 1);
+                                            console.log(numbers, !isNaN(numbers))
+                                            if ((lastLetter === 'V' || lastLetter === 'X') && !isNaN(numbers)) {
+                                         
+                                            } else {
+                                                alert('This is not a valid old nic number', (lastLetter === 'V' || lastLetter === 'X'), isNaN(numbers));
+                                                document.getElementById('nic').value = "";
+                                            }
+                                        }
+                                        // if length 13
+                                        else if (nic.length == 12) {
+                                            // only digits
+                                            if (!isNaN(nic)) {} else {
+                                                alert('This is not a valid new nic number', nic);
+                                                document.getElementById('nic').value = "";
+                                            }
+                                        } else {
+                                            alert('Please Enter Valid Nic');
+                                            document.getElementById('nic').value = "";
+                                            $('nic').show();
+                                        }
+
+                                    })
+                                });
+                            </script>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Date Of Birth</label>
@@ -189,7 +227,6 @@ $id = $_GET['id'];
                                 <option value="A">Active</option>
                                 <option value="E">Expired</option>
                                 <option value="I">Initiated</option>
-                                <option value="R">Rejected</option>
                             </select>
                         </div>
                     <?php

@@ -1,6 +1,6 @@
 <?php
 // Turn off all error reporting
-error_reporting(0);
+//error_reporting(0);
 session_start();
 //$companyId = $_SESSION['companyId']
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
@@ -45,20 +45,20 @@ if (isset($_POST["import"])) {
             $sql1 = "SELECT userName FROM user WHERE userName='$value[12]'";
             $res1 = mysqli_query($con, $sql1);
 
-            $sql2 = "SELECT email FROM employee WHERE email='$value[7]'";
+            $sql2 = "SELECT email FROM employee WHERE email='$value[7]' and (employee.status != 'R' or employee.status != 'E' employee.companyId = $companyID)";
             $res2 = mysqli_query($con, $sql2);
 
-            $sql3 = "SELECT contactNo FROM employee WHERE contactNo = '$value[5]'";
+            $sql3 = "SELECT contactNo FROM employee WHERE contactNo = '$value[5]'  and (employee.status != 'R' or employee.status != 'E' ) employee.companyId = $companyID";
             $res3 = mysqli_query($con, $sql3);
 
-            $sql4 = "SELECT nic FROM employee WHERE nic='$value[3]'";
+            $sql4 = "SELECT nic FROM employee WHERE nic='$value[3]'  and (employee.status != 'R' or employee.status != 'E' ) employee.companyId = $companyID";
             $res4 = mysqli_query($con, $sql4);
 
-            //$sql5 = "SELECT bankCode FROM ref_bank WHERE bankCode ='$value[8]'";
-           // $res5 = mysqli_query($con, $sql5);
+            $sql5 = "SELECT bankCode FROM ref_bank WHERE bankCode ='$value[8]'";
+             $res5 = mysqli_query($con, $sql5);
 
-           // $sql6 = "SELECT branchCode FROM bankbranch WHERE bankCode ='$value[8]' and branchCode ='$value[9]'";
-           // $res6 = mysqli_query($con, $sql6);
+             $sql6 = "SELECT branchCode FROM bankbranch WHERE bankCode ='$value[8]' and branchCode ='$value[9]'";
+             $res6 = mysqli_query($con, $sql6);
 
 
             if (!empty($res1) && mysqli_num_rows($res1) > 0) {
@@ -78,15 +78,87 @@ if (isset($_POST["import"])) {
                 $error['3'] = "Duplicate NIC - " . implode("-", mysqli_fetch_assoc($res4)) . " ";
             }
 
-           // if (mysqli_num_rows($res5) < 1) {
-            //    $error['4'] = "Bank Code Doesn't Exist" . implode("-", mysqli_fetch_assoc($res5)) . " ";
-            //}
+           if (!empty($res5) &&  mysqli_num_rows($res5) < 1) {
+                $error['4'] = "Bank Code Doesn't Exist";
+            }
 
-           // if (mysqli_num_rows($res6) < 1) {
-           //     $error['5'] = "Branch Code Doesn't Match to Bank Code" . implode("-", mysqli_fetch_assoc($res6)) . " ";
-           // }
+            if (!empty($res6) &&  mysqli_num_rows($res6) < 1) {
+                $error['5'] = "Branch Code Doesn't Match to Bank Code";
+            }
 
-            $errors = implode(",", $error);
+            if ($value[12] == trim($value[12]) && strpos($value[12], ' ') !== false) {
+                $error['6'] = "User Name Have Spacers";
+            }
+
+            if (IsNullOrEmptyString($value[12])) {
+                $error['7'] = "User Name Empty";
+            }
+            if (IsNullOrEmptyString($value[0])) {
+                $error['8'] = "Emplyee Name Empty";
+            }
+            if (IsNullOrEmptyString($value[7])) {
+                $error['9'] = "Email Empty";
+            }
+            if (IsNullOrEmptyString($value[5])) {
+                $error['10'] = "Contact No Empty";
+            }
+            if (IsNullOrEmptyString($value[3])) {
+                $error['11'] = "Nic Empty";
+            }
+
+            if (!validNIC($value[3])) {
+                $error['12'] = "Invalid Nic";
+            }
+
+            function IsNullOrEmptyString($str)
+            {
+                return (!isset($str) || trim($str) === '');
+            }
+
+            function validNIC($nic)
+            {
+
+                $valid = false;
+
+                /* Length must be 10 or 12 digits */
+                if (strlen($nic) == 10 || strlen($nic) == 12) {
+
+                    /* First 9 or 12 digit must be integer */
+                    $intPart = "";
+
+                    if (strlen($nic) == 10) {
+                        $intPart = substr($nic, 0, 9);
+                    } else {
+                        $intPart = $nic;
+                    }
+
+                    if (is_numeric($intPart) == 1) {
+
+                        if (strlen($nic) == 10) {
+                            if (substr($nic, 9, 1) == "V" || substr($nic, 9, 1) == "X" || substr($nic, 9, 1) == "v" || substr($nic, 9, 1) == "x") {
+
+                                $midint = (int)substr($nic, 2, 3);
+
+                                if ($midint >= 1 && $midint <= 366) {
+                                    $valid = true;
+                                } elseif ($midint >= 501 && $midint <= 866) {
+                                    $valid = true;
+                                }
+                            }
+                        } elseif (strlen($nic) == 12) {
+                            $midint = (int)substr($nic, 4, 3);
+                            if ($midint >= 1 && $midint <= 366) {
+                                $valid = true;
+                            } elseif ($midint >= 501 && $midint <= 866) {
+                                $valid = true;
+                            }
+                        }
+                    }
+                }
+                return $valid;
+            }
+            
+            $errors = implode("'\t'", $error);
             if (!empty($error)) {
                 $sql = "INSERT INTO errors (a,b,c,d,e,f,g,h,i,j,k,l,m,n,errors) VALUES ('$value[0]','$value[1]','$value[2]','$value[3]',
                 '$value[4]','$value[5]','$value[6]','$value[7]','$value[8]','$value[9]','$value[10]','$value[11]','$value[12]','$value[13]','$errors')";
