@@ -17,11 +17,7 @@ $corpData = mysqli_query($con, $companyQuery);
 
 while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
     $time = strtotime($fetchedCompany['lastUpdateDate']);
-<<<<<<< HEAD
     $duedate = date("Y-m-d", strtotime("+1 month", $time));
-=======
-    $final = date("Y-m-d", strtotime("+1 month", $time));
->>>>>>> 247e5eb2c76a686eb7b85c042829bdedbd675f84
 }
 ?>
 
