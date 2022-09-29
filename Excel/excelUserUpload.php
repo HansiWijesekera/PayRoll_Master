@@ -4,7 +4,6 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 require_once('./vendor/autoload.php');
 require_once('./db.php');
-require_once('./import.php');
 require_once('./filter.php');
 include '../Headers/adminHeader.php';
 session_start();
@@ -13,9 +12,8 @@ if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
   header("location: ../index.php");
   exit();
 }
-
 $companyID = $_SESSION['companyId'];
-
+require_once('./import.php');
 ?>
 
 

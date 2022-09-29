@@ -30,6 +30,6 @@ echo ucwords($columnHeader) . "\n" . $setData . "\n";
 
 $truncateQuery = "TRUNCATE TABLE errors";
 mysqli_query($con, $truncateQuery);
-header("Refresh:0");
+
 
 
