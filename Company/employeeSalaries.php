@@ -17,7 +17,7 @@ $corpData = mysqli_query($con, $companyQuery);
 
 while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
     $time = strtotime($fetchedCompany['lastUpdateDate']);
-    $duedate = date("Y-m-d", strtotime("+1 month", $time));
+    $final = date("Y-m-d", strtotime("+1 month", $time));
 }
 ?>
 
@@ -51,21 +51,21 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                             <th>Employee Name</th>
                             <th>Salary Date</th>
                             <?php
-                            $categoryQuery = "select salary_category.code, salary_category.description from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status = 'E'";
+                            $categoryQuery = "select salary_category.description from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status = 'E'";
                             $cateData = mysqli_query($con, $categoryQuery);
 
                             while (($fetchedCategory = mysqli_fetch_assoc($cateData))) {
-                                echo "<th class='head' data-scc='". $fetchedCategory['code'] ."'>";
+                                echo "<th>";
                                 echo $fetchedCategory['description'];
                                 echo "</th>";
                             }
                             ?>
                             <?php
-                            $categoryQuery = "select salary_category.code, salary_category.description from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status <> 'E' order by salary_category.code ";
+                            $categoryQuery = "select salary_category.description from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status <> 'E' order by salary_category.code ";
                             $cateData = mysqli_query($con, $categoryQuery);
 
                             while (($fetchedCategory = mysqli_fetch_assoc($cateData))) {
-                                echo "<th class='head' data-scc='". $fetchedCategory['code'] ."'>";
+                                echo "<th>";
                                 echo $fetchedCategory['description'];
                                 echo "</th>";
                             }
@@ -79,7 +79,6 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                         $employeeQuery = "select * from employee where employee.companyId = $companyID";
                         $employeeData = mysqli_query($con, $employeeQuery);
                         while (($fetchedEmp = mysqli_fetch_assoc($employeeData))) {
-                            $empList[] = $fetchedEmp['employeeId'];
                             $employeeId = $fetchedEmp['employeeId'];
                             $reqSalary = 0;
                             $totalSalary = 0;
@@ -92,8 +91,8 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                                 <td>
                                     <?php echo $fetchedEmp['employeeName']; ?>
                                 </td>
-                                <td class="dueDate">
-                                    <?php echo $duedate; ?>
+                                <td>
+                                    <?php echo $final; ?>
                                 </td>
                                 <?php
                                 $categoryQuery = "select salary_category.code, salary_category.type, salary_category.common, salary_category.commonValue, company_wise_categories.status, company_wise_categories.companyWiseCategoriesId from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status = 'E'";
@@ -110,7 +109,7 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                                             $reqSalary += $fetchedEmpWiseCate['amount'];
                                             $totalSalary += $fetchedEmpWiseCate['amount'];
 
-                                            echo "<td class='salCategory " . $fetchedCategory['code'] . '-' . $fetchedEmp['employeeId'] . "'>";
+                                            echo "<td>";
                                             echo $fetchedEmpWiseCate['amount'];
                                             echo "</td>";
                                         }
@@ -118,7 +117,7 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                                 }
                                 ?>
                                 <?php
-                                $categoryQuery = "select salary_category.code, salary_category.type, salary_category.common, salary_category.commonValue, company_wise_categories.status, company_wise_categories.companyWiseCategoriesId, salary_category.status as sal_cate_sts from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status <> 'E' order by salary_category.code ";
+                                $categoryQuery = "select salary_category.code, salary_category.type, salary_category.common, salary_category.commonValue, company_wise_categories.status, company_wise_categories.companyWiseCategoriesId, salary_category.status as sal_cate_sts from salary_category inner join company_wise_categories on company_wise_categories.salaryCategoryCode = salary_category.code where company_wise_categories.companyId  = $companyID AND salary_category.status <> 'E'";
                                 $cateData = mysqli_query($con, $categoryQuery);
 
                                 while (($fetchedCategory = mysqli_fetch_assoc($cateData))) {
@@ -136,7 +135,7 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                                         } else {
                                             echo "<td>";
                                 ?>
-                                            <input type="number" class="salCategory input-value <?php echo $fetchedCategory['code'] . '-' . $fetchedEmp['employeeId']; ?>" value='0'>
+                                            <input type="number" class="input-value <?php echo $fetchedCategory['code']; ?>" name="<?php echo $fetchedCategory['code'] . $fetchedEmp['employeeId']; ?>" />
                                         <?php
                                             echo "</td>";
                                         }
@@ -151,7 +150,7 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                                     }
 
                                     if ($cate_wise_salary != 0) {
-                                        echo "<td class='salCategory " . $fetchedCategory['code'] . '-' . $fetchedEmp['employeeId'] . "'>";
+                                        echo "<td>";
                                         echo $cate_wise_salary;
                                         echo "</td>";
                                     }
@@ -168,11 +167,11 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                                     }
                                 }
 
-                                echo "<td class='TotSal-" . $fetchedEmp['employeeId'] . "'>";
+                                echo "<td>";
                                 echo $totalSalary;
                                 echo "</td>";
 
-                                echo "<td class='GovPay-" . $fetchedEmp['employeeId'] . "'>";
+                                echo "<td>";
                                 echo $governmentPay;
                                 echo "</td>";
 
@@ -184,7 +183,7 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
                     </tbody>
                 </table>
                 <div class="form-group">
-                    <input type="submit" class="btnRegister" id="submit" value="Add Salary">
+                    <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Salary">
                 </div>
             </div>
         </div>
@@ -203,30 +202,16 @@ while (($fetchedCompany = mysqli_fetch_assoc($corpData))) {
             $("#submit").on('click', function(e) {
                 e.preventDefault();
 
-                var objects = $(".employeeIds");
-                var count = 0;
-                var data = [];
-
-                for (var obj of objects) {
-                    employeeID = ($(obj).text()).trim();
-                    var temp = [];
-
-                    $('.head').each(function(){
-                        temp[$(this).data('scc')] = $('.'+$(this).data('scc')+'-'+employeeID).text();
-                    })
-
-                    temp['TS'] = $('.TotSal-'+employeeID).text();
-                    temp['GP'] = $('.GovPay-'+employeeID).text();
-                    data[count] = temp;
-                    count += 1;
-                }
-
-                console.log(data);
+                var name = $('#name').val();
+                var email = $('#email').val();
 
                 $.ajax({
                     url: "insert_data.php",
                     type: "POST",
-                    data: data,
+                    data: {
+                        name: name,
+                        email: email
+                    },
                     success: function(data) {
                         alert("Data Inserted Successfully");
                         $("#form-body").hide();

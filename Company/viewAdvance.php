@@ -28,9 +28,13 @@ $companyID = $_SESSION['companyId'];
 
     <div class="container-fluid" style="margin-top:30px !important;">
         <div class="container">
-            <div class="row mb-2">
-                <div class="col-md-9">
+            <div class="row 2">
+                <div class="col-8">
                     <h1>Salary Advance Requests</h1>
+                </div>
+                <div class="col-4" style="text-align: right;">
+                    <a href="payAdvance.php" class="btn btn-primary btn-sm"> Advance Payment</a>
+                    <a href="paidAdvance.php" class="btn btn-primary btn-sm"> Paid Advance</a><br><br>
                 </div>
             </div>
             <div class="table-responsive">

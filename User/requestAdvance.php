@@ -176,7 +176,7 @@ $maxAmt = $BS - $Advance;
                             <input type="number" name="amount" class="form-control" max="<?php echo $maxAmt; ?>" required />
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btnRegister" name="submit" value="Request Advance">
+                            <input type="submit" class="btn btn-primary" name="submit" value="Request Advance">
                         </div>
                     </div>
                 </form>

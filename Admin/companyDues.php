@@ -24,6 +24,7 @@ echo $today;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
@@ -66,7 +67,7 @@ echo $today;
                                 <td><?php echo $result1[2]; ?></td>
                                 <td><?php echo $result1[0]; ?></td>
                                 <td><?php echo $result1[1]; ?></td>
-                                <td><a href="SalaryDet/employeeVice.php?id=<?php echo $result1[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
+                                <td><a href="employeeVice.php?id=<?php echo $result1[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
                             <?php
                         }
                             ?>
@@ -106,7 +107,7 @@ echo $today;
                                 <td><?php echo $result[2]; ?></td>
                                 <td><?php echo $result[0]; ?></td>
                                 <td><?php echo $result[1]; ?></td>
-                                <td><a href="SalaryDet/employeeVice.php?id=<?php echo $result[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
+                                <td><a href="employeeVice.php?id=<?php echo $result[3]; ?>" class="btn btn-primary btn-sm">View Brakedown</a></td>
                             <?php
                         }
                             ?>
@@ -184,6 +185,7 @@ echo $today;
 
         });
     </script>
+
 
 </body>
 

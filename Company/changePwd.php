@@ -91,7 +91,7 @@ if (count($_POST) > 0) {
                             <td><input type="password" name="confirmPassword" class="txtField" /><span id="confirmPassword" class="required"></span></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><input type="submit" name="submit" value="Submit" class="btnSubmit"></td>
+                                <td colspan="2"><input type="submit" name="submit" value="Submit" class="btn btn-primary btn-sm"></td>
                             </tr>
                         </table>
                     </div>

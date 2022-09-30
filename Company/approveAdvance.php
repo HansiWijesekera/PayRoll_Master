@@ -13,7 +13,7 @@ $id = $_GET['id'];
 
 $query = "update salary_advance set status = 'A' , approvedDate = CURDATE() where advanceId = $id ";
 if (mysqli_query($con, $query)) {
-    echo " <script type='text/javascript'>alert('Advance Approved Sucessfully');location.href='viewAdvance.php'</script>";
+    echo " <script type='text/javascript'>alert('Advance Approved Sucessfully');location.href='payAdvance.php'</script>";
 } else {
     echo " <script type='text/javascript'>alert('Error');location.href='viewAdvance.php'</script>";
 }

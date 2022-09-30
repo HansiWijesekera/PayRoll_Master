@@ -1,6 +1,6 @@
 <?php include '../dbconn.php';
 include '../Headers/companyHeader.php';
-
+error_reporting(0);
 session_start();
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 2) {
     header("location: ../index.php");
@@ -33,11 +33,17 @@ if (isset($_POST['employeeName'])) {
     $userType = "3";
 
 
-    $sql = "SELECT * FROM employee WHERE email='$email'";
+    $sql = "SELECT * FROM employee WHERE email='$email' and (employee.status != 'R' or employee.status != 'E') and employee.companyId = $companyID";
     $res = mysqli_query($con, $sql);
 
-    $sql1 = "SELECT * FROM user WHERE userName='$userName'";
+    $sql1 = "SELECT * FROM user WHERE userName='$userName' ";
     $res1 = mysqli_query($con, $sql1);
+
+    $sql2 = "SELECT * FROM employee WHERE nic='$nic' and (employee.status != 'R' or employee.status != 'E') and employee.companyId = $companyID";
+    $res2 = mysqli_query($con, $sql2);
+
+    $sql3 = "SELECT * FROM employee WHERE contactNo='$cantactNo' and (employee.status != 'R' or employee.status != 'E') and employee.companyId = $companyID";
+    $res3 = mysqli_query($con, $sql3);
 
     $query =
         "INSERT INTO user(userName,password,userType)
@@ -45,10 +51,16 @@ if (isset($_POST['employeeName'])) {
 
 
     if (mysqli_num_rows($res1) > 0) {
-        echo " <script type='text/javascript'>alert('Username Already Taken');location.href='newUser.php'</script>";
-    } else {
+        echo " <script type='text/javascript'>alert('Username Already Taken');</script>";
+    }
+    elseif (mysqli_num_rows($res2) > 0){
+        echo " <script type='text/javascript'>alert('NIC Already Taken');</script>"; ;
+    } elseif (mysqli_num_rows($res3) > 0) {
+        echo " <script type='text/javascript'>alert('Contact Number Already Taken');</script>";;
+    }
+     else {
         if (mysqli_num_rows($res) > 0) {
-            echo " <script type='text/javascript'>alert('Email Already Registerd Please enter another Email');location.href='newUser.php'</script>";
+            echo " <script type='text/javascript'>alert('Email Already Registerd Please enter another Email');</script>";
         } else {
             $query = mysqli_query($con, $query);
             $userId = mysqli_insert_id($con);
@@ -136,7 +148,44 @@ if (isset($_POST['employeeName'])) {
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter NIC</label>
-                            <input type="text" name="nic" class="form-control" minlength="10" maxlength="12" required />
+                            <input type="text" name="nic" id="nic" class="form-control" minlength="10" maxlength="12" required />
+                            <script>
+                                $(document).ready(function() {
+                                    $('#nic').change(function(e) {
+                                        const nic = $(this).val();
+                                        // should be requred
+                                        if (nic == '') {
+                                            alert('Nic requred');
+                                        }
+                                        // if length 10 
+                                        else if (nic.length == 10) {
+                                            // last letter should be X or V
+                                            const lastLetter = nic[nic.length - 1];
+                                            const numbers = nic.slice(0, nic.length - 1);
+                                            console.log(numbers, !isNaN(numbers))
+                                            if ((lastLetter === 'V' || lastLetter === 'X') && !isNaN(numbers)) {
+
+                                            } else {
+                                                alert('This is not a valid old nic number', (lastLetter === 'V' || lastLetter === 'X'), isNaN(numbers));
+                                                document.getElementById('nic').value = "";
+                                            }
+                                        }
+                                        // if length 13
+                                        else if (nic.length == 12) {
+                                            // only digits
+                                            if (!isNaN(nic)) {} else {
+                                                alert('This is not a valid new nic number', nic);
+                                                document.getElementById('nic').value = "";
+                                            }
+                                        } else {
+                                            alert('Please Enter Valid Nic');
+                                            document.getElementById('nic').value = "";
+                                            $('nic').show();
+                                        }
+
+                                    })
+                                });
+                            </script>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Enter Date Of Birth</label>
@@ -163,7 +212,7 @@ if (isset($_POST['employeeName'])) {
                                 <option value="R">Rejected</option>
                             </select>
                         </div> -->
-                         <div class="form-group">
+                        <div class="form-group">
                             <label class="form-control-label">Enter Bank Code</label>
                             <div>
                                 <?php
@@ -213,7 +262,7 @@ if (isset($_POST['employeeName'])) {
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" class="btnRegister" name="submit" value="Add User">
+                            <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add User">
                         </div>
                     </div>
                 </form>

@@ -28,6 +28,7 @@ $companyID = $_SESSION['companyId'];
 
     <div class="container-fluid" style="margin-top:30px !important;">
         <div class="container">
+            <a href="viewAdvance.php" class="btn btn-primary btn-sm"> Go back</a><br><br>
             <div class="row mb-2">
                 <div class="col-md-9">
                     <h1>Paid Advance Details</h1>

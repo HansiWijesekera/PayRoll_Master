@@ -79,7 +79,7 @@ $userID = $_SESSION['userID'];
                     }
                     ?>
                     <div class="form-group">
-                        <input type="submit" class="btnRegister" name="submit" value="Update Details">
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Update Details">
                     </div>
 
                 </div>

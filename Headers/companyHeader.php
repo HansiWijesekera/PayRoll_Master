@@ -81,10 +81,8 @@
         <a href="../Company/viewEmployees.php">Employee Platform</a>
         <a href="../Company/linkSalaryCategories.php">Link Salary Categories</a>
         <a href="../Company/employeeSalaries.php">Salary Initiation</a>
-        <a href="../Company/viewAdvance.php">Approve Advance</a>
-        <a href="../Company/payAdvance.php">Advance Payment</a>
+        <a href="../Company/viewAdvance.php">Salary Advance</a>
         <a href="../Company/employeeDues.php">Salary Payments</a>
-        <a href="../Company/paidAdvance.php">Paid Advance</a>
         <a href="../Excel/companyPaidSalaries.php">Paid Salaries</a>
         <a href="../logout.php">Log Out</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">

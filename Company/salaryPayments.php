@@ -74,7 +74,7 @@ if (isset($_POST['amount'])) {
                         <input type="number" name="amount" class="form-control" max="<?php echo ($result['payableAmount'] - $settledAmount); ?>" required />
                     </div><br>
                     <div class="form-group">
-                        <input type="submit" class="btnRegister" name="submit" value="Submit Payment">
+                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit Payment">
                     </div>
                 </div>
             </form>
