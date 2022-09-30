@@ -62,23 +62,6 @@ if (isset($_POST['reject'])) {
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/fc-3.2.2/fh-3.1.2/r-2.1.0/sc-1.4.2/datatables.min.css" />
-        <script type="text/javascript">
-            jQuery(document).ready(function() {
-                var table = $('#tblUser').DataTable({
-                    scrollX: true,
-                    scrollCollapse: false,
-                    fixedColumns: {
-                        leftColumns: 0,
-                        rightColumns: 1,
-                    }
-                });
-                $("#form-body").hide();
-            });
-        </script>
     </head>
 </head>
 
@@ -87,115 +70,152 @@ if (isset($_POST['reject'])) {
         <div class="container">
             <a href="viewEmployees.php" class="btn btn-primary btn-sm"> Go back</a><br><br>
             <div class="row mb-2">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <h1>Uploaded Employees</h1>
                 </div>
-                <div class="col-5" style="text-align: right;">
-                    <form action="" method="POST">
-                        <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Confirm All">
-                        <input type="submit" class="btn btn-primary btn-sm" name="reject" value="Reject All">
-                    </form>
-                </div>
-                <div class="table-responsive">
-                    <table id="tblUser" class="table table-striped stripe row-border order-column">
-                        <thead>
+            </div>
+            <div class="table-responsive">
+                <table id="tblUser">
+                    <thead>
+                        <tr>
+
+                            <th>
+                            <th>Employee Name</th>
+                            <th>Join Date</th>
+                            <th>Addess</th>
+                            <th>NIC</th>
+                            <th>DOB</th>
+                            <th>Contact No</th>
+                            <th>Job Title</th>
+                            <th>Email</th>
+                            <th>BankDetails</th>
+                            <th>Branch Code</th>
+                            <th>Account Number</th>
+                            <th>Account Holder</th>
+                            <th>Initiated Date</th>
+                            <th>Action</th>
+
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $selectQuery = "select * from employee where companyId  = $companyID and status = 'I' ";
+                        $squery = mysqli_query($con, $selectQuery);
+                        while (($result = mysqli_fetch_assoc($squery))) {
+                        ?>
                             <tr>
-
-                                <th>
-                                <th>Employee Name</th>
-                                <th>Join Date</th>
-                                <th>Addess</th>
-                                <th>NIC</th>
-                                <th>DOB</th>
-                                <th>Contact No</th>
-                                <th>Job Title</th>
-                                <th>Email</th>
-                                <th>BankDetails</th>
-                                <th>Branch Code</th>
-                                <th>Account Number</th>
-                                <th>Account Holder</th>
-                                <th>Initiated Date</th>
-                                <th>Action</th>
-
-                                </th>
-
+                                <td><?php echo $result['employeeId'];
+                                    $empid = $result['employeeId']; ?></td>
+                                <td><?php echo $result['employeeName']; ?></td>
+                                <td><?php echo $result['joinDate']; ?></td>
+                                <td><?php echo $result['address']; ?></td>
+                                <td><?php echo $result['nic']; ?></td>
+                                <td><?php echo $result['dob']; ?></td>
+                                <td><?php echo $result['cantactNo']; ?></td>
+                                <td><?php echo $result['jobTitle']; ?></td>
+                                <td><?php echo $result['email']; ?></td>
+                                <td> <?php
+                                        $selectQuery1 = "SELECT * FROM  bankinfo inner join ref_bank on bankinfo.bankCode = ref_bank.bankCode WHERE bankinfo.employeeId = '$empid' ";
+                                        $squery1 = mysqli_query($con, $selectQuery1);
+                                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                                            echo $result1['bankCode'] . " - " . $result1['bankName'];
+                                        }
+                                        ?>
+                                </td>
+                                <td> <?php
+                                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                                        $squery1 = mysqli_query($con, $selectQuery1);
+                                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                                            echo $result1['branchCode'];
+                                        }
+                                        ?>
+                                </td>
+                                <td> <?php
+                                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                                        $squery1 = mysqli_query($con, $selectQuery1);
+                                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                                            echo $result1['accountNumber'];
+                                        }
+                                        ?>
+                                </td>
+                                <td> <?php
+                                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                                        $squery1 = mysqli_query($con, $selectQuery1);
+                                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                                            echo $result1['accoundHolder'];
+                                        }
+                                        ?>
+                                </td>
+                                <td> <?php
+                                        $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
+                                        $squery1 = mysqli_query($con, $selectQuery1);
+                                        while (($result1 = mysqli_fetch_assoc($squery1))) {
+                                            echo $result1['initiatedDate'];
+                                        }
+                                        ?>
+                                </td>
+                                <td>
+                                    <a href="EmployeePlatform/submit.php?id=<?php echo $empid; ?>" class="btn btn-primary btn-sm">Approve</a>
+                                    <a href="EmployeePlatform/reject.php?id=<?php echo $empid; ?>" class="btn btn-danger btn-sm">Reject</a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $selectQuery = "select * from employee where companyId  = $companyID and status = 'I' ";
-                            $squery = mysqli_query($con, $selectQuery);
-                            while (($result = mysqli_fetch_assoc($squery))) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $result['employeeId'];
-                                        $empid = $result['employeeId']; ?></td>
-                                    <td><?php echo $result['employeeName']; ?></td>
-                                    <td><?php echo $result['joinDate']; ?></td>
-                                    <td><?php echo $result['address']; ?></td>
-                                    <td><?php echo $result['nic']; ?></td>
-                                    <td><?php echo $result['dob']; ?></td>
-                                    <td><?php echo $result['cantactNo']; ?></td>
-                                    <td><?php echo $result['jobTitle']; ?></td>
-                                    <td><?php echo $result['email']; ?></td>
-                                    <td> <?php
-                                            $selectQuery1 = "SELECT * FROM  bankinfo inner join ref_bank on bankinfo.bankCode = ref_bank.bankCode WHERE bankinfo.employeeId = '$empid' ";
-                                            $squery1 = mysqli_query($con, $selectQuery1);
-                                            while (($result1 = mysqli_fetch_assoc($squery1))) {
-                                                echo $result1['bankCode'] . " - " . $result1['bankName'];
-                                            }
-                                            ?>
-                                    </td>
-                                    <td> <?php
-                                            $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
-                                            $squery1 = mysqli_query($con, $selectQuery1);
-                                            while (($result1 = mysqli_fetch_assoc($squery1))) {
-                                                echo $result1['branchCode'];
-                                            }
-                                            ?>
-                                    </td>
-                                    <td> <?php
-                                            $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
-                                            $squery1 = mysqli_query($con, $selectQuery1);
-                                            while (($result1 = mysqli_fetch_assoc($squery1))) {
-                                                echo $result1['accountNumber'];
-                                            }
-                                            ?>
-                                    </td>
-                                    <td> <?php
-                                            $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
-                                            $squery1 = mysqli_query($con, $selectQuery1);
-                                            while (($result1 = mysqli_fetch_assoc($squery1))) {
-                                                echo $result1['accoundHolder'];
-                                            }
-                                            ?>
-                                    </td>
-                                    <td> <?php
-                                            $selectQuery1 = "SELECT * FROM  bankinfo WHERE employeeId = '$empid' ";
-                                            $squery1 = mysqli_query($con, $selectQuery1);
-                                            while (($result1 = mysqli_fetch_assoc($squery1))) {
-                                                echo $result1['initiatedDate'];
-                                            }
-                                            ?>
-                                    </td>
-                                    <td>
-                                        <a href="EmployeePlatform/submit.php?id=<?php echo $empid; ?>" class="btn btn-primary btn-sm">Approve</a><br>
-                                        <a href="EmployeePlatform/reject.php?id=<?php echo $empid; ?>" class="btn btn-danger btn-sm" style="width: 70px;">Reject</a>
-                                    </td>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-
-
-                </div>
-
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <input type="submit" class="btnRegister" name="submit" value="Confirm Employees">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btnRegister" name="reject" value="Reject Employees">
+                    </div>
+                </form>
 
             </div>
-        </div>
 
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $('#tblUser').DataTable();
+            $("#form-body").hide();
+
+            $("#insert-btn").on('click', function() {
+                $("#form-body").toggle(500);
+            });
+
+            $("#submit").on('click', function(e) {
+                e.preventDefault();
+
+                var name = $('#name').val();
+                var email = $('#email').val();
+
+                $.ajax({
+                    url: "insert_data.php",
+                    type: "POST",
+                    data: {
+                        name: name,
+                        email: email
+                    },
+                    success: function(data) {
+                        alert("Data Inserted Successfully");
+                        $("#form-body").hide();
+                        location.reload(true);
+                    }
+                });
+
+            });
+
+        });
+    </script>
 
 </body>
 

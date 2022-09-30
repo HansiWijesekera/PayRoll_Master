@@ -85,7 +85,7 @@ $result = mysqli_fetch_row($squery);
             </tbody>
         </table>
         <form action="duesExport.php" method="post">
-            <input type="submit" name="submit" class="btn btn-primary btn-sm" value="Export To Excel">
+            <input type="submit" name="submit" value="Export To Excel">
         </form>
     </div>
 </div>

@@ -1,6 +1,7 @@
 <?php include '../../dbconn.php';
 
 session_start();
+$employeeId = $_SESSION['employeeId'];
 
 $id = $_GET['id'];
 

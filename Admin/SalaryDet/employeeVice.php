@@ -2,11 +2,11 @@
 
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-include '../dbconn.php';
-include '../Headers/adminHeader.php';
+include '../../dbconn.php';
+include '../../Headers/adminHeader.php';
 session_start();
 if (!isset($_SESSION['userID']) || $_SESSION['userType'] != 1) {
-    header("location: ../index.php");
+    header("location: ../../index.php");
     exit();
 }
 $id  = $_GET['id'];

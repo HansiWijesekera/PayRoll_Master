@@ -65,7 +65,7 @@ $today = DATE("Y-m-d");
                         }
                         ?>
                     </select>
-                    <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Submit">
+                    <input type="submit" class="btnRegister" name="submit" value="Submit">
                 </div><br>
 
             </form>

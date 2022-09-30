@@ -123,7 +123,7 @@ if (isset($_POST['code'])) {
 
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Add Salary Category">
+                                <input type="submit" class="btnRegister" name="submit" value="Add Salary Category">
                             </div>
                         </div>
                     </form>
