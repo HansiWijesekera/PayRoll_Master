@@ -60,7 +60,7 @@ $today = DATE("Y-m-d");
                         <?php
                         foreach ($options as $option) {
                         ?>
-                            <option><?php echo $option['employeeName']; ?> <?php echo ' - ' . $option['nic']; ?> </option>
+                            <option><?php echo $option['employeeName']; ?></option>
                         <?php
                         }
                         ?>

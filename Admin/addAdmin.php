@@ -21,14 +21,14 @@ if (isset($_POST['submit'])) {
 	     VALUES('$userName','$password','$userType')";
 
     if (mysqli_num_rows($res1) > 0) {
-        echo " <script type='text/javascript'>alert('Username Already Registerd');location.href='newCompany.php'</script>";
+        echo " <script type='text/javascript'>alert('Username Already Registerd');location.href='addAdmin.php'</script>";
     } else {
         // $userID = mysqli_insert_id($con);
         if ($query = mysqli_query($con, $query)) {
-            echo " <script type='text/javascript'>alert('Admin Added Succesfully');location.href='../Excel/excelUserUpload.php'</script>";
+            echo " <script type='text/javascript'>alert('Admin Added Succesfully');location.href='addAdmin.php'</script>";
         } else {
         }
-        echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='newCompany.php'</script>";
+        echo " <script type='text/javascript'>alert('User Added Sucessfully');location.href='addAdmin.php'</script>";
     }
 }
 ?>
